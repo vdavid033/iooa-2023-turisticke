@@ -7,3 +7,5 @@
     dohvatiti zadnje izmjene s udaljenog repozitorija (pull)
     napraviti spajanje s vašim izmjenama (merge, add, commit)
     prebaciti izmjene na GitHub (push)
+
+    test Borna Crnkovic
