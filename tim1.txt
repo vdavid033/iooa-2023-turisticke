@@ -6,3 +6,5 @@ napraviti spajanje s vašim izmjenama (merge, add, commit)
 prebaciti izmjene na GitHub (push)
 
 kristian matijasic
+
+md
