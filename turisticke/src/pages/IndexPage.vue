@@ -1,8 +1,12 @@
 <template>
   <q-page class="flex flex-center">
-    <img alt="Quasar logo" src="~assets/quasar-logo-vertical.svg" style="width: 200px; height: 200px">
+    <div class="text-center">
+      <img alt="Veleri logo" src="~assets/veleri-logo-horizontal.png" style="width: 500px; height: 200px">
+      <p>Veleučilište u Rijeci</p>
+    </div>
   </q-page>
 </template>
+
 
 <script>
 import { defineComponent } from 'vue'
