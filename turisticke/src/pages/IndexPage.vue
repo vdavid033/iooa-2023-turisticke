@@ -27,7 +27,11 @@
     </div>
 
   </q-page>
+
+
 </template>
+
+
 
 
 <script>
@@ -43,6 +47,8 @@ export default defineComponent({
 
 
   data() {
+
+
     return {
       showDialog: false
     }
@@ -58,4 +64,15 @@ export default defineComponent({
 })
 
 
+
 </script>
+
+
+<style>
+
+body{
+background-color:aqua;
+
+}
+
+</style>
