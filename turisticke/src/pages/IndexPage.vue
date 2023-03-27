@@ -28,16 +28,8 @@
       <H4>Veleučilište u Rijeci</H4>
     </div>
   </q-page>
-
-
 </template>
 
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> 0ef926d5be0b1e90dfef31cce32ec05e23e16ea7
 <script>
 import { defineComponent } from "vue";
 
@@ -45,8 +37,6 @@ export default defineComponent({
   name: "IndexPage",
 
   data() {
-
-
     return {
       showDialog: false,
     };
@@ -59,23 +49,9 @@ export default defineComponent({
       this.showDialog = false;
     },
 
-<<<<<<< HEAD
-
-=======
     redirectToWebsite() {
       window.location.href = "https://www.veleri.hr/hr";
     },
   },
 });
->>>>>>> 0ef926d5be0b1e90dfef31cce32ec05e23e16ea7
 </script>
-
-
-<style>
-
-body{
-background-color:aqua;
-
-}
-
-</style>
