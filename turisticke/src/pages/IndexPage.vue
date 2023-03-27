@@ -27,6 +27,8 @@ const age = ref(null);
 const accept = ref(false);
 
 
+
+
 const onSubmit = () => {
   if (accept.value !== true) {
 
