@@ -4,58 +4,54 @@
     <q-dialog v-model="showDialog">
       <q-card>
         <q-card-section>
-          <q-item-label header>
-            Pažnja!!!
-          </q-item-label>
-          <q-item-label>
-            Kliknili ste na dugme
-          </q-item-label>
+          <q-item-label header> Pažnja!!! </q-item-label>
+          <q-item-label> Kliknili ste na dugme </q-item-label>
         </q-card-section>
         <q-card-actions align="right">
           <q-btn label="OK" color="primary" @click="closeDialog" />
         </q-card-actions>
       </q-card>
     </q-dialog>
+  </div>
 
-
+  <div>
+    <q-btn @click="redirectToWebsite">Idi na VeleRi početnu stranicu</q-btn>
   </div>
 
   <q-page class="flex flex-center">
     <div class="text-center">
-      <img alt="Veleri logo" src="~assets/veleri-logo-horizontal.png" style="width: 500px; height: 200px">
+      <img
+        alt="Veleri logo"
+        src="~assets/veleri-logo-horizontal.png"
+        style="width: 500px; height: 200px"
+      />
       <H4>Veleučilište u Rijeci</H4>
     </div>
-
   </q-page>
 </template>
 
-
 <script>
-
-
-
-import { defineComponent } from 'vue'
-
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'IndexPage',
-
-
+  name: "IndexPage",
 
   data() {
     return {
-      showDialog: false
-    }
+      showDialog: false,
+    };
   },
   methods: {
     showAlert() {
-      this.showDialog = true
+      this.showDialog = true;
     },
     closeDialog() {
-      this.showDialog = false
-    }
-  }
-})
+      this.showDialog = false;
+    },
 
-
+    redirectToWebsite() {
+      window.location.href = "https://www.veleri.hr/hr";
+    },
+  },
+});
 </script>
