@@ -1,4 +1,4 @@
 Dodana je tablica 'atrakcije' u bazu podataka iooa-turisticke
 Link: http://student.veleri.hr/phpmyadmin/sql.php?server=1&db=iooa-turisticke&table=atrakcije&pos=0git
-Korisničko ime: iooa-turističke
+Korisničko ime: iooa-turisticke
 Lozinka: 11
