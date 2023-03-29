@@ -14,19 +14,19 @@ const resetGrada = () => {
 
   <input type="text" v-model="imeGrada">
   <button @click="resetGrada()">Reset</button>
-</template> -->
+</template>  -->
+
+
 
 <script setup>
-import { useQuasar } from 'quasar'
-import { ref } from 'vue'
+import { useQuasar } from 'quasar';
+import { ref } from 'vue';
 
 const $q = useQuasar()
 
 const name = ref(null);
 const age = ref(null);
 const accept = ref(false);
-
-
 
 
 const onSubmit = () => {
