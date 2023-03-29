@@ -7,6 +7,7 @@
           <div class="q-pa-md">
             <q-card>
               <q-card-section>
+                <div></div>
                 <div class="text-h6">Naziv atrakcije:</div>
                 <div class="text-subtitle1">{{ naziv }}</div>
               </q-card-section>
