@@ -10,7 +10,7 @@
               <div class="text-subtitle1">{{ naziv }}</div>
             </q-card-section>
             <q-card-section>
-              <div class="text-h6">Opis atrakcije:</div>
+              <div class="text-h6">Opis:</div>
               <div class="text-subtitle1">{{ opis }}</div>
             </q-card-section>
             <q-card-section>
@@ -20,14 +20,16 @@
               />
             </q-card-section>
             <q-card-section>
-              <div class="text-h6">Ocjena atrakcije:</div>
+              <div class="text-h6">Ocjena:</div>
               <div class="text-subtitle1">{{ ocjena }}</div>
             </q-card-section>
           </q-card>
         </q-layout-header>
-        <q-layout-right>
-          <img alt="" src="~assets/naslovna.jpg" style="" />
-        </q-layout-right>
+        <q-layout>
+          <q-layout-right style="margin: 0 600px">
+            <img alt="" src="~assets/naslovna.jpg" style="max-width: 600px" />
+          </q-layout-right>
+        </q-layout>
       </q-layout>
     </q-page>
   </div>
