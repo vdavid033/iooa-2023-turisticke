@@ -29,9 +29,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); 
 
 
-app.post('/dodajAtrakciju', function (request, response) {
+app.post('/unosAtrakcija', function (request, response) {
     const data = request.body;
     contact = [[data.naziv, data.opis, data.slika, data.prosjecna_ocjena, data.geografska_duzina, data.geografska_sirina, data.adresa]]
+    
     dbConn.query('INSERT INTO atrakcije (naziv) VALUES ? ',
     [contact], function (error, results, fields) {
     if (error) throw error;
@@ -39,8 +40,8 @@ app.post('/dodajAtrakciju', function (request, response) {
     'Dodana atrakcija.' });
     });
 
-    app.listen(4200, function () {
-        console.log('Node app is running on port 4200');
+    app.listen(3000, function () {
+        console.log('Node app is running on port 3000');
        });
        module.exports = app;
    });
