@@ -3,31 +3,24 @@
  * INSERT INTO
  */
 const mysql = require('mysql');
-const con = require('./connection');
 const express = require('express');
 const app = express();
-/*app.use(bodyParser.json());
-app.use(
-  bodyParser.urlencoded({
-    extended: false,
-  })
-);
-
-con.connect(function(err) {
-    if (err) throw err;
-    console.log("Uspješno");
-    var sql = "INSERT INTO atrakcije  (naziv, opis, slika, geografska_sirina, geografska_duzina, adresa ) VALUES (' ', ' ')";
-    con.query(sql, function (err, result) {
-      if (err) throw err;
-      console.log("1 red unesen");
-    });
-  });
-*/
-
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); 
+const dbConfig = require("./dbConfig");
 
+
+var dbConn = mysql.createConnection({
+    host: dbConfig.HOST,
+    user: dbConfig.USER,
+    password: dbConfig.PASSWORD,
+    database: dbConfig.DB
+
+});
+
+// connect to database
+dbConn.connect();
 
 app.post('/unosAtrakcija', function (request, response) {
     const data = request.body;
@@ -39,10 +32,10 @@ app.post('/unosAtrakcija', function (request, response) {
     return response.send({ error: false, data: results, message:
     'Dodana atrakcija.' });
     });
+ });
 
-    app.listen(3000, function () {
-        console.log('Node app is running on port 3000');
-       });
-       module.exports = app;
-   });
+app.listen(3000, function () {
+console.log('Node app is running on port 3000');
+});
+module.exports = app;
    
