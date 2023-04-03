@@ -37,8 +37,9 @@ export default {
   },
 };
 </script>
+
 <style>
-.bg-dark-blue {
+.bg-blue {
   background-color: #1e90ff;
   color: white;
 }
