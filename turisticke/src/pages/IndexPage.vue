@@ -21,7 +21,8 @@
     </q-card-section>
     <q-card-section>
       <div class="text-h6">Ocjena:</div>
-      <div class="text-subtitle1">4.5{{ ocjena }}</div>
+      <!-- <div class="text-subtitle1">4.5{{ ocjena }}</div> -->
+      <q-rating v-model="stars" :max="5" size="32px" />
     </q-card-section>
     <q-card-section>
       <q-btn @click="$router.push('/komentari')" label="Pogledaj komentare" />
@@ -48,6 +49,11 @@ export default {
     // kod za povezivanje na bazu
   },
 };
+</script>
+<script setup>
+import { ref } from "vue";
+
+const stars = ref(4);
 </script>
 
 <style scoped>
