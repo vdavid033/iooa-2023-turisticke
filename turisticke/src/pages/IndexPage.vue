@@ -6,7 +6,7 @@
 
       <q-card-section>
         <q-btn fab color="primary" icon="place" class="absolute" style="top: 0; right: 12px; transform: translateY(-50%)"
-          to="atract/atr" />
+          to="one_atraction" />
 
         <div class="row no-wrap items-center">
           <div class="col text-h6 ellipsis">Rijeka Trsat</div>

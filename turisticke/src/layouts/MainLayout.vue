@@ -33,14 +33,13 @@ import EssentialLink from "components/EssentialLink.vue";
 const linksList = [
   {
     title: "Prijava",
-    caption: "quasar.dev",
     icon: "login",
-    link: "",
+    link: "auth",
     target: "_self",
   },
   {
     title: "Moje atrakcije",
-    caption: "github.com/quasarframework",
+    caption: "popis mojih atrakcija",
     icon: "favorite",
     link: "",
     target: "_self",
@@ -49,7 +48,7 @@ const linksList = [
     title: "Testiranje Axiosa",
     caption: "služi za testiranje Axiosa",
     icon: "swap_horizontal_circle",
-    link: "auth/test",
+    link: "axo",
     target: "_self",
   },
   // {

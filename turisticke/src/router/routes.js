@@ -8,14 +8,15 @@ const routes = [
     path: "/auth",
     component: () => import("layouts/BlankLayout.vue"),
     children: [
-      { path: "test", component: () => import("pages/AxiosPageTest.vue") },
+      { path: "", component: () => import("pages/LoginPage.vue") },
     ],
   },
   {
-    path: "/atract",
+    path: "/",
     component: () => import("layouts/BlankLayout.vue"),
     children: [
-      { path: "atr", component: () => import("pages/AtrakcijePage.vue") },
+      { path: "one_atraction", component: () => import("pages/AtrakcijePage.vue") },
+      { path: "axo", component: () => import("pages/AxiosPageTest.vue") },
     ],
   },
 
