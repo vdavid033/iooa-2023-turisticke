@@ -1,62 +1,50 @@
 <template>
-
-<div class="col items-end" style="width: 500px">
+  <q-card-section>
+    <div class="text-h6">Naziv atrakcije:</div>
+    <div class="text-subtitle1">Trsatska gradina{{ naziv }}</div>
+  </q-card-section>
+  <div class="row justify-end" style="width: 500px">
     <q-card class="my-card">
-      <img src="https://cdn.quasar.dev/img/mountains.jpg">
-
-
+      <img src="~assets/trsat.jpg">
     </q-card>
-    </div>
 
 
-
-  <q-layout-left>
-    <q-card-section>
-      <div class="text-h6">Naziv atrakcije:</div>
-      <div class="text-subtitle1">Trsatska gradina{{ naziv }}</div>
-    </q-card-section>
     <q-card-section>
       <div class="text-h6">Opis:</div>
       <div class="q-truncate">
-        <q-card class="my-card">
-      <q-card-section>
-        Trsatska gradina je jedno od mojih najdražih mjesta u Rijeci i mjesto
-        koje često i sa zadovoljstvom posjećujem jer mi uvijek iznova, ljeti i
-        zimi daje poseban osjećaj mira. Osim pogleda, pažnju na ulazu privlači i
-        masivan kameni, sivi zid koji kao oklop štiti ljepote unutrašnjosti
-        Trsatske gradine. Kada kroz kulu uđemo u područje gradine, s lijeve
-        strane nalazi se masivni željezni top, čiji je pogled, kao pogled
-        brojnih posjetitelja usmjeren prema moru. S desne strane, podignemo li
-        pogled, vidjet ćemo da se tamo, osim kafića , nalazi glavna i najviša
-        kula unutar koje se nalazi stepenište koje omogućava pristup njezinim
-        najvišim dijelovima i naravno, najljepšem pogledu.{{ opis }}
-      </q-card-section>
-    </q-card>
 
+        <q-card-section>
+          Trsatska gradina je jedno od mojih najdražih mjesta u Rijeci i mjesto
+          koje često i sa zadovoljstvom posjećujem jer mi uvijek iznova, ljeti i
+          zimi daje poseban osjećaj mira. Osim pogleda, pažnju na ulazu privlači i
+          masivan kameni, sivi zid koji kao oklop štiti ljepote unutrašnjosti
+          Trsatske gradine. Kada kroz kulu uđemo u područje gradine, s lijeve
+          strane nalazi se masivni željezni top, čiji je pogled, kao pogled
+          brojnih posjetitelja usmjeren prema moru. S desne strane, podignemo li
+          pogled, vidjet ćemo da se tamo, osim kafića , nalazi glavna i najviša
+          kula unutar koje se nalazi stepenište koje omogućava pristup njezinim
+          najvišim dijelovima i naravno, najljepšem pogledu.
+        </q-card-section>
 
       </div>
+
     </q-card-section>
-    <q-card-section>
-      <div class="text-h6">Ocjena:</div>
-      <!-- <div class="text-subtitle1">4.5{{ ocjena }}</div> -->
-      <q-rating v-model="stars" :max="5" size="32px" />
-    </q-card-section>
-    <q-card-section>
-      <q-btn @click="$router.push('/komentari')" label="Pogledaj komentare" />
-    </q-card-section>
-    <q-page class="bg-blue"> </q-page>
-  </q-layout-left>
 
+  </div>
 
-  <q-card class="my-card">
-      <q-card-section>
-        <q-layout-right style="position: absolute; top: 0; right: 0">
-    <img alt="" src="~assets/trsat.jpg" style="max-width: 408px" />
-  </q-layout-right>
-      </q-card-section>
-    </q-card>
+  <q-card-section>
 
+    <div class="text-h6">Ocjena:</div>
+    <!-- <div class="text-subtitle1">4.5{{ ocjena }}</div> -->
+    <q-rating v-model="stars" :max="5" size="32px" />
+  </q-card-section>
+  <q-card-section>
+    <q-btn @click="$router.push('/komentari')" label="Pogledaj komentare" />
+  </q-card-section>
 
+  <div class="q-pa-md q-gutter-sm">
+    <q-btn color="primary" to="/" label="Natrag na početnu" />
+  </div>
 </template>
 
 <script>
@@ -85,7 +73,15 @@ const stars = ref(4);
 .bg-blue {
   background-color: #1e90ff;
 }
+
 .q-truncate {
   max-width: 600px;
+}
+
+.container {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 5px;
 }
 </style>
