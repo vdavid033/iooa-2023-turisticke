@@ -15,7 +15,7 @@
           <div class="text-h6"><b>Turističke atrakcije</b></div>
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div>Bad Developers</div>
       </q-toolbar>
     </q-header>
 
@@ -45,45 +45,48 @@ const linksList = [
   {
     title: "Prijava",
     caption: "quasar.dev",
-    icon: "school",
-    link: "https://quasar.dev",
+    icon: "login",
+    link: "",
+    target: "_self",
   },
   {
     title: "Moje atrakcije",
     caption: "github.com/quasarframework",
-    icon: "code",
-    link: "https://github.com/quasarframework",
-  },
-  {
-    title: "",
-    caption: "chat.quasar.dev",
-    icon: "chat",
-    link: "https://chat.quasar.dev",
-  },
-  {
-    title: "",
-    caption: "forum.quasar.dev",
-    icon: "record_voice_over",
-    link: "https://forum.quasar.dev",
-  },
-  {
-    title: "",
-    caption: "@quasarframework",
-    icon: "rss_feed",
-    link: "https://twitter.quasar.dev",
-  },
-  {
-    title: "",
-    caption: "@QuasarFramework",
-    icon: "public",
-    link: "https://facebook.quasar.dev",
-  },
-  {
-    title: "",
-    caption: "Community Quasar projects",
     icon: "favorite",
-    link: "https://awesome.quasar.dev",
+    link: "",
+    target: "_self",
   },
+  {
+    title: "Testiranje Axiosa",
+    caption: "služi za testiranje Axiosa",
+    icon: "swap_horizontal_circle",
+    link: "auth/test",
+    target: "_self",
+  },
+  // {
+  //   title: "",
+  //   caption: "forum.quasar.dev",
+  //   icon: "record_voice_over",
+  //   link: "https://forum.quasar.dev",
+  // },
+  // {
+  //   title: "",
+  //   caption: "@quasarframework",
+  //   icon: "rss_feed",
+  //   link: "https://twitter.quasar.dev",
+  // },
+  // {
+  //   title: "",
+  //   caption: "@QuasarFramework",
+  //   icon: "public",
+  //   link: "https://facebook.quasar.dev",
+  // },
+  // {
+  //   title: "",
+  //   caption: "Community Quasar projects",
+  //   icon: "favorite",
+  //   link: "https://awesome.quasar.dev",
+  // },
 ];
 
 export default defineComponent({
