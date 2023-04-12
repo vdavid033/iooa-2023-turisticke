@@ -30,8 +30,7 @@ app.post('/unosAtrakcija', function (request, response) {
     dbConn.query('INSERT INTO atrakcije (naziv, opis, slika, prosjecna_ocjena, geografska_duzina, geografska_sirina, adresa ) VALUES ? ',
     [contact], function (error, results, fields) {
     if (error) throw error;
-    return response.send({ error: false, data: results, message:
-    'Atrakcija unesena.' });
+    return response.send({ error: false, data: results, message:'Atrakcija unesena.' });
     });
  });
 
