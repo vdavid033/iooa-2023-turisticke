@@ -2,7 +2,7 @@
   <div class="q-pa-md row items-start q-gutter-md">
 
     <q-card v-for="post in posts" :key="post.id" class="my-card" flat bordered>
-      <q-img src="~assets/trsat.jpg" />
+      <q-img :src=post.slika />
 
       <q-card-section>
         <q-btn fab color="primary" icon="place" class="absolute" style="top: 0; right: 12px; transform: translateY(-50%)"
