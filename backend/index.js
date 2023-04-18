@@ -14,7 +14,6 @@ app.use(function (req, res, next) {
     next();
 });
 // kraj fix-a
-
 app.get('/atrakcije', (req,res)=>{
     con.query("select * from atrakcije", (err,result)=>{
         if(err){
@@ -24,6 +23,36 @@ app.get('/atrakcije', (req,res)=>{
         }
     });
 });
+
+
+app.get("/komentari", function (request, response) {
+    dbConn.query("SELECT * FROM Komentari", function (error, results, fields) {
+        if (error) throw error;
+        return response.send({
+            error: false,
+            data: results,
+            message: "lista komentara.",
+        });
+    });
+});
+
+
+app.get("/korisnici", function (request, response) {
+    dbConn.query("SELECT * FROM korisnici", function (error, results, fields) {
+        if (error) throw error;
+        return response.send({
+            error: false,
+            data: results,
+            message: "lista korisnika.",
+        });
+    });
+});
+
+
+
+
+
+
 
 app.listen(4200, () => {
     console.log("Listen on the port 4200...");
