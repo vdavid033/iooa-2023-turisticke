@@ -23,11 +23,6 @@
                     :rules="[(val) => (val !== null && val !== '') || 'Unesite geografsku širinu']" />
             </div>
             <div style="width: 500px">
-                <q-select filled type="double" lazy-rules
-                    :rules="[(val) => (val !== null && val !== '') || 'Odaberite kategoriju']" v-model="selectedCategory"
-                    label="Kategorija" :options="categories" option-label="name" option-value="value" />
-            </div>
-            <div style="width: 500px">
                 <q-input filled type="double" label="Adresa atrakcije" lazy-rules :rules="[
                     (val) => (val !== null && val !== '') || 'Unesite adresu atrakcije',
                 ]" />
@@ -50,40 +45,26 @@
 <script>
 import { ref } from "vue";
 import axios from "axios"; // Import axios
+import {api} from "boot/axios";
 export default {
-    data() {
-        return {
-            selectedCategory: null,
-            categories: [
-                { name: "Povijesno", value: "history" },
-                { name: "Moderno", value: "modern" },
-                { name: "Korisno", value: "useful" },
-                { name: "Ostalo", value: "other" },
-            ],
-        };
-    },
     methods: {
-        async submitForm() {
-
-            const sampleData = {
-                id_atrakcije: 1234,
-                naziv: "Test",
-                slika: "test.jpg",
-                opis: "testiranje",
-                geografka_sirina: 100,
-                geografska_duzina: 150,
-                adresa: "Probna 12",
-                id_korisnika: 1,
-                sifra_kategorije: 1
-            };
-            try {
-                const response = await axios.post("http://localhost:3000/unosAtrakcija", sampleData);
-                console.log(response.data);
-            } catch (error) {
-                console.error(error);
-            }
-        },
+    async submitForm() {
+      const sampleData = {
+        naziv: "Test",
+        opis: "testiranje",
+        prosjecna_ocjena: 5,
+        geografska_sirina: 150,
+        geografska_duzina: 200,
+        adresa: "Test svrha",
+      };
+      try {
+        const response = await api.post("http://localhost:3000/unosAtrakcija", sampleData);
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+      }
     },
+  },
 };
 </script>
   

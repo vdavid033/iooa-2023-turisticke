@@ -35,14 +35,37 @@
     placeholder="Geografska dužina atr">
   </q-input>
   <div class="row justify-center q-pa-md">
-    <q-btn align="between" unelevated color="primary" label="Potvrdi" text-align="center" />
+    <q-btn align="between" @click="submitForm" unelevated color="primary" label="Potvrdi" text-align="center" />
   </div>
 </div>
   </q-page>
 </template>
 
-<script setup>
+<script>
 import { ref } from 'vue'
+import axios from "axios"; // Import axios
+
+
+export default {
+    methods: {
+    async submitForm() {
+      const sampleData = {
+        naziv: "Test",
+        opis: "testiranje",
+        prosjecna_ocjena: 5,
+        geografska_sirina: 150,
+        geografska_duzina: 200,
+        adresa: "Test svrha",
+      };
+      try {
+        const response = await api.post("http://localhost:3000/unosAtrakcija", sampleData);
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+  },
+};
 
 const inputOpis = ref('')
 const inputDuzina = ref('')
