@@ -75,6 +75,27 @@ app.get("/korisnici", function (request, response) {
 
 
 
+app.get('/atrakcija/:id', function (request, response) {
+    let id_atrakcije = request.params.id;
+    if (!id_atrakcije) {
+        return response.status(400).send({
+            error: true, 
+            
+            message: 'Unesite id_atrakcije'
+        });
+    }
+    dbConn.query('SELECT * FROM atrakcije where id_atrakcije=?', id_atrakcije, function
+        (error, results, fields) {
+        if (error) throw error;
+        return response.send({
+            error: false, data: results[0], message:
+                'error lista atrakcije.'
+        });
+    });
+});
+
+
+
 
 
 
