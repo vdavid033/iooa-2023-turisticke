@@ -5,11 +5,13 @@ const mysql = require('mysql');
 const express = require('express');
 const app = express();
 var bodyParser = require('body-parser');
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false })); 
-const dbConfig = require("./dbConfig");
+const conn=require('./connection')
 
+//app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({ extended: false })); 
+//const dbConfig = require("./dbConfig");
 
+/*
 var dbConn = mysql.createConnection({
     host: dbConfig.HOST,
     user: dbConfig.USER,
@@ -18,7 +20,7 @@ var dbConn = mysql.createConnection({
 });
 
 //spajanje s bazom
-dbConn.connect();
+dbConn.connect();*/
 
 
 
@@ -40,7 +42,7 @@ app.use(function (req, res, next) {
 
 //uzimanje podataka o atrakcijama
 app.get('/atrakcije', (req,res)=>{
-    dbCon.query("select * from atrakcije", (err,result)=>{
+    conn.query("select * from atrakcije", (err,result)=>{
         if(err){
             res.send('error');
         }else{
@@ -51,7 +53,7 @@ app.get('/atrakcije', (req,res)=>{
 
 // uzimanje podataka o komentarima
 app.get("/komentari", function (request, response) {
-    dbConn.query("SELECT * FROM Komentari", function (error, results, fields) {
+    conn.query("SELECT * FROM Komentari", function (error, results, fields) {
         if (error) throw error;
         return response.send({
             error: false,
@@ -63,7 +65,7 @@ app.get("/komentari", function (request, response) {
 
 //uzimanje podataka o korisnicima
 app.get("/korisnici", function (request, response) {
-    dbConn.query("SELECT * FROM korisnici", function (error, results, fields) {
+    conn.query("SELECT * FROM korisnici", function (error, results, fields) {
         if (error) throw error;
         return response.send({
             error: false,
@@ -84,7 +86,7 @@ app.get('/atrakcija/:id', function (request, response) {
             message: 'Unesite id_atrakcije'
         });
     }
-    dbConn.query('SELECT * FROM atrakcije where id_atrakcije=?', id_atrakcije, function
+    conn.query('SELECT * FROM atrakcije where id_atrakcije=?', id_atrakcije, function
         (error, results, fields) {
         if (error) throw error;
         return response.send({
@@ -100,10 +102,10 @@ app.get('/atrakcija/:id', function (request, response) {
 
 
 //port na kojem je app
-app.listen(3000, function () {
-console.log('Node app is running on port 3000');
+app.listen(4200, function () {
+console.log('Node app is running on port 4200');
 });
-module.exports = app;
+//module.exports = app;
 
 
 
