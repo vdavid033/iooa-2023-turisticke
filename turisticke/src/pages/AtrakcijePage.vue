@@ -45,7 +45,7 @@
     <q-rating v-model="stars" :max="5" size="32px" />
   </q-card-section>
   <q-card-section>
-    <q-btn @click="$router.push('/komentari')" label="Pogledaj komentare" />
+    <q-btn class="button" @click="$router.push('/komentari')" label="Pogledaj komentare" />
   </q-card-section>
 
   <div class="q-pa-md q-gutter-sm">
@@ -81,6 +81,9 @@ const stars = ref(4);
 /*.bg-blue {
   background-color: #1e90ff;
 }*/
+.button{
+background-color: white;
+}
 
 .q-truncate {
   /* max-width: 600px; */
