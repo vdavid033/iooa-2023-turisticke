@@ -1,15 +1,21 @@
 <template>
+  <div style="background-color: cyan;">
   <q-card-section>
     <div class="text-h6">Naziv atrakcije:</div>
     <div class="text-subtitle1">Trsatska gradina{{ naziv }}</div>
   </q-card-section>
-  <div class="row justify-end" style="width: 500px">
-    <q-card class="my-card">
+  
+
+<div class="image">
+
+      <q-card> 
       <img src="~assets/trsat.jpg">
-    </q-card>
-
-
-    <q-card-section>
+     </q-card> 
+     
+    </div>
+   
+    <div class="container d-flex justify-content-center align-items-center">
+      <q-card-section>
       <div class="text-h6">Opis:</div>
       <div class="q-truncate">
 
@@ -29,8 +35,8 @@
       </div>
 
     </q-card-section>
-
-  </div>
+    </div>
+    
 
   <q-card-section>
 
@@ -44,6 +50,7 @@
 
   <div class="q-pa-md q-gutter-sm">
     <q-btn color="primary" to="/" label="Natrag na početnu" />
+  </div>
   </div>
 </template>
 
@@ -70,18 +77,29 @@ const stars = ref(4);
 </script>
 
 <style scoped>
-.bg-blue {
+
+/*.bg-blue {
   background-color: #1e90ff;
-}
+}*/
 
 .q-truncate {
-  max-width: 600px;
+  /* max-width: 600px; */
+  text-align: auto;
+  font-size: 16px;
 }
 
-.container {
-  display: grid;
-  align-items: center;
-  grid-template-columns: 1fr 1fr 1fr;
-  column-gap: 5px;
+.container { 
+  display:block;
+  align-items: center; 
+  grid-template-columns: 1fr 1fr 1fr;  
+  column-gap: 5px; 
+ } 
+
+.image{
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
 </style>
