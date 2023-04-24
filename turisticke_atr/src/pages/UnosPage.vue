@@ -43,28 +43,31 @@
     </q-card>
 </template>
 <script>
-import { ref } from "vue";
-import axios from "axios"; // Import axios
-import {api} from "boot/axios";
+/*
+import { ref } from 'vue'
+*/
+import axios from 'axios' // Import axios
+/*
+import { api } from 'boot/axios'
+*/
 export default {
-    methods: {
-    async submitForm() {
+  methods: {
+    async submitForm () {
       const sampleData = {
-        naziv: "Test",
-        opis: "testiranje",
+        naziv: 'Test',
+        opis: 'testiranje',
         prosjecna_ocjena: 5,
         geografska_sirina: 150,
         geografska_duzina: 200,
-        adresa: "Test svrha",
-      };
-      try {
-        const response = await api.post("http://localhost:3000/unosAtrakcija", sampleData);
-        console.log(response.data);
-      } catch (error) {
-        console.error(error);
+        adresa: 'Test svrha'
       }
-    },
-  },
-};
+      try {
+        const response = await axios.post('http://localhost:3000/unosAtrakcija', sampleData)
+        console.log(response.data)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+  }
+}
 </script>
-  
