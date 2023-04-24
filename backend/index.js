@@ -90,8 +90,8 @@ app.get('/atrakcije/:id', function (request, response) {
         (error, results, fields) {
         if (error) throw error;
         return response.send({
-            error: false, data: results[0], message:
-                'error lista atrakcije.'
+           data: results[0]
+                
         });
     });
 });
