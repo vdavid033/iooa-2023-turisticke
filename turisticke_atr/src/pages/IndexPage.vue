@@ -10,7 +10,7 @@
             <q-input v-model="inputLokacija" label="Lokacija" placeholder="Lokacija atrakcije">
             </q-input>
 
-            <q-uploader url="http://localhost:4444/upload" label="Slika atrakcije" style="max-width: 300px" />
+            <q-uploader url="http://localhost:8080/upload" label="Slika atrakcije" style="max-width: 300px" />
 
             <q-input v-model="inputSirina" label="Širina" placeholder="Grografska Širina atr">
             </q-input>
@@ -18,7 +18,12 @@
             <q-input v-model="inputDuzina" label="Dužina" placeholder="Geografska dužina atr">
             </q-input>
             <div class="row justify-center q-pa-md">
-                <q-btn align="between" @click="submitForm" unelevated color="primary" label="Potvrdi" text-align="center" />
+              <q-btn
+              label="Unesi"
+              @click="submitForm"
+              color="green"
+              class="q-ml-sm"
+            />
             </div>
         </div>
     </q-page>
@@ -30,16 +35,18 @@
 import { ref } from 'vue'
 */
 import axios from 'axios' // Import axios
-
+// eslint-disable-next-line no-unused-vars
+import { ref } from 'vue'
 export default {
+
   methods: {
     async submitForm () {
       const sampleData = {
         naziv: 'Test',
         opis: 'testiranje',
-        prosjecna_ocjena: 5,
-        geografska_sirina: 150,
-        geografska_duzina: 200,
+        prosjecna_ocjena: '5',
+        geografska_sirina: '15.2',
+        geografska_duzina: '20.0',
         adresa: 'Test svrha'
       }
       try {

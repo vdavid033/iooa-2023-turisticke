@@ -7,6 +7,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false })); 
 const dbConfig = require("./dbConfig");
 
+const cors = require('cors');
+app.use(cors({
+    origin: 'http://localhost:8080'
+}));
+
 
 var dbConn = mysql.createConnection({
     host: dbConfig.HOST,
@@ -73,9 +78,6 @@ app.post('/unosKorisnika', function (request, response) {
     'Ocjena unesena' });
     });
  });
-
-
-
 
 app.listen(3000, function () {
 console.log('Node app is running on port 3000');
