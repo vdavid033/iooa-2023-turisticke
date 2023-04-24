@@ -5,13 +5,13 @@ const mysql = require('mysql');
 const express = require('express');
 const app = express();
 var bodyParser = require('body-parser');
-const conn=require('./connection')
+//const conn=require('./connection')
 
-//app.use(bodyParser.json());
-//app.use(bodyParser.urlencoded({ extended: false })); 
-//const dbConfig = require("./dbConfig");
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false })); 
+const dbConfig = require("./dbConfig");
 
-/*
+
 var dbConn = mysql.createConnection({
     host: dbConfig.HOST,
     user: dbConfig.USER,
@@ -20,7 +20,7 @@ var dbConn = mysql.createConnection({
 });
 
 //spajanje s bazom
-dbConn.connect();*/
+dbConn.connect();
 
 
 
@@ -42,7 +42,7 @@ app.use(function (req, res, next) {
 
 //uzimanje podataka o atrakcijama
 app.get('/atrakcije', (req,res)=>{
-    conn.query("select * from atrakcije", (err,result)=>{
+    dbConn.query("select * from atrakcije", (err,result)=>{
         if(err){
             res.send('error');
         }else{
@@ -53,7 +53,7 @@ app.get('/atrakcije', (req,res)=>{
 
 // uzimanje podataka o komentarima
 app.get("/komentari", function (request, response) {
-    conn.query("SELECT * FROM Komentari", function (error, results, fields) {
+    dbConn.query("SELECT * FROM Komentari", function (error, results, fields) {
         if (error) throw error;
         return response.send({
             error: false,
@@ -65,7 +65,7 @@ app.get("/komentari", function (request, response) {
 
 //uzimanje podataka o korisnicima
 app.get("/korisnici", function (request, response) {
-    conn.query("SELECT * FROM korisnici", function (error, results, fields) {
+    dbConn.query("SELECT * FROM korisnici", function (error, results, fields) {
         if (error) throw error;
         return response.send({
             error: false,
@@ -77,7 +77,7 @@ app.get("/korisnici", function (request, response) {
 
 
 
-app.get('/atrakcija/:id', function (request, response) {
+app.get('/atrakcije/:id', function (request, response) {
     let id_atrakcije = request.params.id;
     if (!id_atrakcije) {
         return response.status(400).send({
@@ -86,7 +86,7 @@ app.get('/atrakcija/:id', function (request, response) {
             message: 'Unesite id_atrakcije'
         });
     }
-    conn.query('SELECT * FROM atrakcije where id_atrakcije=?', id_atrakcije, function
+    dbConn.query('SELECT * FROM atrakcije where id_atrakcije=?', id_atrakcije, function
         (error, results, fields) {
         if (error) throw error;
         return response.send({
