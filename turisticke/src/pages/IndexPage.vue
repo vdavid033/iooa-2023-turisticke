@@ -6,7 +6,7 @@
 
       <q-card-section>
         <q-btn fab color="primary" icon="place" class="absolute" style="top: 0; right: 12px; transform: translateY(-50%)"
-          to="one_atraction" />
+          :to="'/one_atraction/' + post.id_atrakcije" />
 
         <div class="row no-wrap items-center">
           <div class="col text-h6 ellipsis">{{ post.naziv }}</div>
@@ -54,7 +54,14 @@ onMounted(() => {
   getPosts()
 })
 
-//const stars = ref(5);
+const goToAtrakcijeDetalji = (id) => {
+  router.push({
+    name: 'one_atraction',
+    params: {
+      id: id
+    }})
+  }
+
 </script>
 
 <style>

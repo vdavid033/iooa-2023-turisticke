@@ -1,73 +1,67 @@
 <template>
-  <q-card-section>
-    <div class="text-h6">Naziv atrakcije:</div>
-    <div class="text-subtitle1">Trsatska gradina{{ naziv }}</div>
-  </q-card-section>
-  <div class="row justify-end" style="width: 500px">
-    <q-card class="my-card">
-      <img src="~assets/trsat.jpg">
-    </q-card>
+  <div class="q-pa-md row items-start q-gutter-md">
 
-
-    <q-card-section>
-      <div class="text-h6">Opis:</div>
-      <div class="q-truncate">
-
-        <q-card-section>
-          Trsatska gradina je jedno od mojih najdražih mjesta u Rijeci i mjesto
-          koje često i sa zadovoljstvom posjećujem jer mi uvijek iznova, ljeti i
-          zimi daje poseban osjećaj mira. Osim pogleda, pažnju na ulazu privlači i
-          masivan kameni, sivi zid koji kao oklop štiti ljepote unutrašnjosti
-          Trsatske gradine. Kada kroz kulu uđemo u područje gradine, s lijeve
-          strane nalazi se masivni željezni top, čiji je pogled, kao pogled
-          brojnih posjetitelja usmjeren prema moru. S desne strane, podignemo li
-          pogled, vidjet ćemo da se tamo, osim kafića , nalazi glavna i najviša
-          kula unutar koje se nalazi stepenište koje omogućava pristup njezinim
-          najvišim dijelovima i naravno, najljepšem pogledu.
-        </q-card-section>
-
-      </div>
-
-    </q-card-section>
-
-  </div>
-
+<q-card v-for="post in posts" :key="post.id" class="my-card" flat bordered>
+  <q-img :src=post.slika />
   <q-card-section>
 
-    <div class="text-h6">Ocjena:</div>
-    <!-- <div class="text-subtitle1">4.5{{ ocjena }}</div> -->
-    <q-rating v-model="stars" :max="5" size="32px" />
-  </q-card-section>
-  <q-card-section>
-    <q-btn @click="$router.push('/komentari')" label="Pogledaj komentare" />
+    <div class="row no-wrap items-center">
+      <div class="col text-h1 ellipsis">{{ post.naziv }}</div>
+    </div>
+
+    <q-rating v-model=post.prosjecna_ocjena :max="5" size="32px" />
   </q-card-section>
 
-  <div class="q-pa-md q-gutter-sm">
-    <q-btn color="primary" to="/" label="Natrag na početnu" />
-  </div>
+  <q-card-section class="q-pt-none">
+    <div class="text-subtitle1">{{ post.adresa }}</div>
+    <div class="text-caption text-grey">
+      {{post.opis}}
+    </div>
+  </q-card-section>
+
+  <q-separator />
+</q-card>
+
+
+
+</div>
+
+
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      naziv: "",
-      opis: "",
-      ocjena: "",
-      komentar: "",
-      //imageData: "",
-    };
-  },
-  created() {
-    // kod za povezivanje na bazu
-  },
-};
-</script>
 <script setup>
-import { ref } from "vue";
 
-const stars = ref(4);
+import { ref, onMounted } from "vue"
+import {api} from 'boot/axios'
+import { useRoute, useRouter } from 'vue-router';
+
+const posts = ref([])
+const route = useRoute()
+const router = useRouter()
+
+const trenutniID = route.params.id
+
+const getPosts = async () => {
+  try{
+    const response = await api.get(`/atrakcije/${trenutniID}`)
+    posts.value = response.data
+
+    console.log("ID je: " , trenutniID)
+    console.log("Podatak iz baze po ID: " , posts.value)
+
+
+  }catch (error){
+    console.log(error)
+  }
+}
+
+onMounted(() => {
+  getPosts()
+})
+
 </script>
+
+
 
 <style scoped>
 .bg-blue {
@@ -83,5 +77,10 @@ const stars = ref(4);
   align-items: center;
   grid-template-columns: 1fr 1fr 1fr;
   column-gap: 5px;
+}
+
+.my-card {
+  width: 100%;
+  max-width: 800px;
 }
 </style>

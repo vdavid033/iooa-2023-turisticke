@@ -15,8 +15,14 @@ const routes = [
     path: "/",
     component: () => import("layouts/BlankLayout.vue"),
     children: [
-      { path: "one_atraction", component: () => import("pages/AtrakcijePage.vue") },
       { path: "axo", component: () => import("pages/AxiosPageTest.vue") },
+    ],
+  },
+  {
+    path: "/one_atraction",
+    component: () => import("layouts/BlankLayout.vue"),
+    children: [
+      {name: "one_atraction", path: ":id", component: () => import("pages/AtrakcijePage.vue") },
     ],
   },
 
