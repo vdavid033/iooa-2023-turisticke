@@ -4,12 +4,17 @@
 const mysql = require('mysql');
 const express = require('express');
 const app = express();
+var cors = require('cors')
 var bodyParser = require('body-parser');
 //const conn=require('./connection')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false })); 
 const dbConfig = require("./dbConfig");
+
+
+app.use(cors());
+
 
 
 var dbConn = mysql.createConnection({
@@ -25,7 +30,7 @@ dbConn.connect();
 
 
 
-
+/*
 // Ovo riješava problem: 
 // Origin <origin> is not allowed by Access-Control-Allow-Origin
 // from origin 'http://localhost:4200' has been blocked by CORS policy
@@ -35,8 +40,7 @@ app.use(function (req, res, next) {
     next();
 });
 // kraj fix-a
-
-
+*/
 
 
 
