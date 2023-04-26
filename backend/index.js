@@ -101,7 +101,7 @@ app.get('/atrakcije/:id', function (request, response) {
 });
 
 
-
+/*
 app.delete('/atrakcije/id', function (request, response) {
     let id_atrakcije = request.params.id;
     if (!id_atrakcije) {
@@ -114,7 +114,35 @@ app.delete('/atrakcije/id', function (request, response) {
     return response.send({ error: false, data: results, message:
     'atrakcija je obrisana.' });
     });
-});
+});*/
+
+
+app.delete('/obrisi_atrakcije/:id', function (request, response){
+
+    
+    let id_atrakcije = request.params.id;
+  
+    console.log(`Received request to delete atrakcija with id: ${id_atrakcije}`); // Log the received id
+  
+    if (!id_atrakcije) {
+      return response.status(400).send({ error: true, message: 'nedostaje id atrakcije' });
+    }
+  
+   const deleteQuery = "DELETE  FROM atrakcije WHERE id_atrakcije = ?";
+     //const deleteQuery = "DELETE  FROM atrakcije WHERE id_atrakcije = '${id}'";
+    dbConn.query(deleteQuery, [id_atrakcije], function (error, results) {
+      if (error) {
+        console.log(`Error when executing the delete query: ${error}`); // Log any error from the query
+        throw error;
+      }
+  
+      console.log('Deletion result: ${JSON.stringify(results)}'); // Log the result of the deletion
+  
+      return response.send({ error: false, data: results, message: 'atrakcija je obrisana obrisi_atrakcije.' });
+    });
+  });
+
+
 
 
 //port na kojem je app
