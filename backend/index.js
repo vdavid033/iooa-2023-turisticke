@@ -102,7 +102,19 @@ app.get('/atrakcije/:id', function (request, response) {
 
 
 
-
+app.delete('/atrakcije/id', function (request, response) {
+    let id_atrakcije = request.params.id;
+    if (!id_atrakcije) {
+    return response.status(400).send({ error: true, message:
+    'nedostaje id atrakcije' });
+    }
+    dbConn.query("DELETE * FROM atrakcije WHERE id_atrakcije = ?",[id_atrakcije],
+    function (error, results) {
+    if (error) throw error;
+    return response.send({ error: false, data: results, message:
+    'atrakcija je obrisana.' });
+    });
+});
 
 
 //port na kojem je app
