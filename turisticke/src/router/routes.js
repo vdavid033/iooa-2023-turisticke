@@ -23,8 +23,27 @@ const routes = [
     component: () => import("layouts/BlankLayout.vue"),
     children: [
       {name: "one_atraction", path: ":id", component: () => import("pages/AtrakcijePage.vue") },
+
     ],
   },
+  {
+    path: "/komentari",
+    component: () => import("layouts/BlankLayout.vue"),
+    children: [
+      {name: "komentari", path: "", component: () => import("src/pages/komentariPage.vue") },
+    ],
+  },
+
+
+  /*
+  {
+   path: "/atr",
+    component: () => import("layouts/BlankLayout.vue"),
+    children: [
+      {name: "atr", path: "/atr", component: () => import("pages/AtrakcijePage.vue") },
+    ],
+  },
+*/
 
   // Always leave this as last one,
   // but you can also remove it
