@@ -1,7 +1,7 @@
 
 
 <template>
-  <div>
+  <div style="background-color: #229df9">
     <div v-for="post in posts" :key="post.id" class="row q-pa-md">
 
       <div q-card>
@@ -15,21 +15,29 @@
 
 
       <div class="q-pa-md">
-            <h4>Opis: {{ post.opis }}</h4>
-            <h4>Adresa: {{ post.adresa }}</h4>
-            <h4>Ocjena: {{ post.prosjecna_ocjena }}</h4>
-            <h4>Geo širina: {{ post.geografska_sirina }}</h4>
-            <h4>Geo dužina: {{ post.geografska_duzina }}</h4>
-            <h4>Adresa: {{ post.adresa }}</h4>
-      </div>
-    </div>
+<div class="q-pa-md items-start q-gutter-xs" style="background-color: black; color: white;">
+  <h6>Opis: {{ post.opis }}</h6>
+  <q-separator color="white" />
+  <h6>Adresa: {{ post.adresa }}</h6>
+  <q-separator color="white" />
+  <h6>Ocjena: {{ post.prosjecna_ocjena }}</h6>
+  <q-separator color="white" />
+  <h6>Geo širina: {{ post.geografska_sirina }}</h6>
+  <q-separator color="white" />
+  <h6>Geo dužina: {{ post.geografska_duzina }}</h6>
+  <q-separator color="white" />
+  <h6>Adresa: {{ post.adresa }}</h6>
+</div>
+
+</div>
+</div>
 
 
     <q-card-section>
-      <q-btn @click="$router.push('/')" label="Natrag na početnu" />
+      <q-btn  color="black" @click="$router.push('/')" label="Natrag na početnu" />
     </q-card-section>
     <q-card-section>
-      <q-btn @click="$router.push('/komentari')" label="Dodaj komentar" />
+      <q-btn  color="black" @click="$router.push('/komentari')" label="Dodaj komentar" />
     </q-card-section>
   </div>
 
