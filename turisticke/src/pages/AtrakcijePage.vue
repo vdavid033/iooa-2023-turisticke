@@ -1,5 +1,3 @@
-
-
 <template>
   <div style="background-color: #229df9">
     <div v-for="post in posts" :key="post.id" class="row q-pa-md">
@@ -15,33 +13,55 @@
 
 
       <div class="q-pa-md">
-<div class="q-pa-md items-start q-gutter-xs" style="background-color: black; color: white;">
-  <h6>Opis: {{ post.opis }}</h6>
-  <q-separator color="white" />
-  <h6>Adresa: {{ post.adresa }}</h6>
-  <q-separator color="white" />
-  <h6>Ocjena: {{ post.prosjecna_ocjena }}</h6>
-  <q-separator color="white" />
-  <h6>Geo širina: {{ post.geografska_sirina }}</h6>
-  <q-separator color="white" />
-  <h6>Geo dužina: {{ post.geografska_duzina }}</h6>
-  <q-separator color="white" />
-  <h6>Adresa: {{ post.adresa }}</h6>
-</div>
+          <div class="q-pa-md items-start q-gutter-xs" style="background-color: black; color: white;">
+            <h6>Opis: {{ post.opis }}</h6>
+            <q-separator color="white" />
+            <h6>Adresa: {{ post.adresa }}</h6>
+            <q-separator color="white" />
+            <h6>Ocjena: {{ post.prosjecna_ocjena }}</h6>
+            <q-separator color="white" />
+            <h6>Geo širina: {{ post.geografska_sirina }}</h6>
+            <q-separator color="white" />
+            <h6>Geo dužina: {{ post.geografska_duzina }}</h6>
+          </div>
+      </div>
+    </div>
 
-</div>
-</div>
 
 
     <q-card-section>
-      <q-btn  color="black" @click="$router.push('/')" label="Natrag na početnu" />
+      <q-btn color="black" @click="$router.push('/')" label="Natrag na početnu" />
     </q-card-section>
     <q-card-section>
-      <q-btn  color="black" @click="$router.push('/komentari')" label="Dodaj komentar" />
+      <q-btn color="black" @click="$router.push('/komentari')" label="Dodaj komentar" />
     </q-card-section>
+
+    <q-separator />
+
+    <div class="q-pa-md row items-start q-gutter-xs">
+      <h5 style="color: white">Komentari:</h5></div>
+
+    <div class="q-pa-md row items-start q-gutter-md">
+      <q-card v-for="post in 6" :key="post" class="my-card" flat bordered>
+        <q-item>
+          <q-item-section avatar>
+            <q-avatar>
+              <img src="https://cdn.quasar.dev/img/boy-avatar.png">
+            </q-avatar>
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Kristian</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-separator />
+        <q-card-section horizontal>
+          <q-card-section>
+            <text>Ovo je testni komentar.</text>
+          </q-card-section>
+        </q-card-section>
+      </q-card>
+    </div>
   </div>
-
-
 
 
 </template>
@@ -85,3 +105,8 @@ onMounted(() => {
 <style scoped></style>
 
 
+<style lang="sass" scoped>
+.my-card
+  width: 100%
+  max-width: 800px
+</style>
