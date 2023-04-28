@@ -35,6 +35,14 @@ const routes = [
   },
 
 
+  {
+    path: "/slika",
+    component: () => import("layouts/BlankLayout.vue"),
+    children: [
+      {name: "slika", path: "", component: () => import("src/pages/dodaj_slika.vue") },
+    ],
+  },
+
   /*
   {
    path: "/atr",

@@ -9,7 +9,7 @@
                 <div class="q-pa-md">
                      <q-btn-dropdown color="black" label="Uredi sliku">
                         <q-list>
-                            <q-item clickable v-close-popup @click="onItemClick">
+                            <q-item clickable v-close-popup @click="$router.push('/slika')" >
                               <q-item-section>
                              <q-item-label>Dodaj sliku</q-item-label>
                               </q-item-section>
