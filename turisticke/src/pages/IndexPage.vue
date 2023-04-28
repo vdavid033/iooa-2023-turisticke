@@ -20,7 +20,7 @@
           <div class="col text-h6 ellipsis">{{ post.naziv }}</div>
         </div>
 
-        <q-rating v-model=post.prosjecna_ocjena :max="5" size="32px" />
+        <q-rating v-model=post.prosjecna_ocjena :max="5" :readonly="true" size="32px" />
       </q-card-section>
 
       <q-card-section class="q-pt-none">

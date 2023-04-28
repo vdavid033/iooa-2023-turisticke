@@ -18,7 +18,8 @@
             <q-separator color="white" />
             <h6>Adresa: {{ post.adresa }}</h6>
             <q-separator color="white" />
-            <h6>Ocjena: {{ post.prosjecna_ocjena }}</h6>
+            <h6>Ocjena:</h6>
+            <q-rating v-model=post.prosjecna_ocjena :max="5" :readonly="true" size="32px" />
             <q-separator color="white" />
             <h6>Geo širina: {{ post.geografska_sirina }}</h6>
             <q-separator color="white" />
