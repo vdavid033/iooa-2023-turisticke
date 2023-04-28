@@ -11,7 +11,7 @@
         <q-btn fab color="primary" icon="place" class="absolute" style="top: 0; right: 12px; transform: translateY(-50%)"
           :to="'/one_atraction/' + post.id_atrakcije" />
 
-          <q-btn fab color="red" icon="delete" class="absolute"  style="top: 0; left: 12px; transform: translateY(-50%)"
+          <q-btn fab color="red" icon="delete" class="absolute"  style="top: 0px; left: 12px; transform: translateY(-50%)"
            @click="deleteById(post.id_atrakcije)" />
 
            <div class="myDiv" style="padding: 10px;"></div>

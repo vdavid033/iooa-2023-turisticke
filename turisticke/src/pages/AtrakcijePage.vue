@@ -3,8 +3,26 @@
     <div v-for="post in posts" :key="post.id" class="row q-pa-md">
 
       <div q-card>
+        
         <q-img :src=post.slika width="800px" height="600px" position="absolute" top="50%" left="50%"
           transform="translate(-50%, -50%)">
+                <div class="q-pa-md">
+                     <q-btn-dropdown color="black" label="Uredi sliku">
+                        <q-list>
+                            <q-item clickable v-close-popup @click="onItemClick">
+                              <q-item-section>
+                             <q-item-label>Dodaj sliku</q-item-label>
+                              </q-item-section>
+                        </q-item>
+
+                            <q-item clickable v-close-popup @click="obrisi_sliku(post.id_atrakcije)">
+                               <q-item-section>
+                            <q-item-label>Obriši sliku</q-item-label>
+                              </q-item-section>
+                          </q-item>     
+                    </q-list>
+                  </q-btn-dropdown>
+                </div>
           <div class="absolute-bottom text-subtitle1 text-center">
             <div style="text-transform:uppercase; font-size:50px">{{ post.naziv }}</div>
           </div>
@@ -12,7 +30,7 @@
       </div>
 
 
-      <div class="q-pa-md">
+      <div class="q-pa-md" >
           <div class="q-pa-md items-start q-gutter-xs" style="background-color: black; color: white;">
             <h6>Opis: {{ post.opis }}</h6>
             <q-separator color="white" />
@@ -93,6 +111,22 @@ const getPosts = async () => {
   }
 }
 
+
+const obrisi_sliku = async (id) => {
+try {
+  //const response = await api.delete('atrakcije/${id}');
+  const response = await api.delete(`http://localhost:4200/obrisi_sliku_atrakcije/${id}`);
+  console.log(response.data);
+  // Perform any additional actions after successful deletion
+} catch (error) {
+  console.log(error);
+}
+  getPosts();
+}
+
+
+
+
 onMounted(() => {
   getPosts()
 })
@@ -110,4 +144,5 @@ onMounted(() => {
 .my-card
   width: 100%
   max-width: 800px
+
 </style>
