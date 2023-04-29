@@ -3,7 +3,7 @@
     <div v-for="post in posts" :key="post.id" class="row q-pa-md">
 
       <div q-card>
-        
+
         <q-img :src=post.slika width="800px" height="600px" position="absolute" top="50%" left="50%"
           transform="translate(-50%, -50%)">
                 <div class="q-pa-md">
@@ -19,7 +19,7 @@
                                <q-item-section>
                             <q-item-label>Obriši sliku</q-item-label>
                               </q-item-section>
-                          </q-item>     
+                          </q-item>
                     </q-list>
                   </q-btn-dropdown>
                 </div>
@@ -30,22 +30,23 @@
       </div>
 
 
-      <div class="q-pa-md" >
-          <div class="q-pa-md items-start q-gutter-xs" style="background-color: black; color: white;">
-            <h6>Opis: {{ post.opis }}</h6>
-            <q-separator color="white" />
-            <h6>Adresa: {{ post.adresa }}</h6>
-            <q-separator color="white" />
-            <h6>Ocjena:</h6>
-            <q-rating v-model=post.prosjecna_ocjena :max="5" :readonly="true" size="32px" />
-            <q-separator color="white" />
-            <h6>Geo širina: {{ post.geografska_sirina }}</h6>
-            <q-separator color="white" />
-            <h6>Geo dužina: {{ post.geografska_duzina }}</h6>
-          </div>
-      </div>
+    <div class="q-pa-md">
+      <div class="q-pa-md items-start q-gutter-xs" style="background-color: black; color: white;">
+        <h6>Opis:</h6>
+        <div class="post-text">{{ post.opis }}</div>
+        <q-separator color="white" />
+        <h6>Adresa:</h6>
+        <h7>{{ post.adresa }}</h7>
+        <q-separator color="white" />
+        <h6>Ocjena:</h6>
+        <q-rating v-model=post.prosjecna_ocjena :max="5" :readonly="true" size="32px" />
+        <q-separator color="white" />
+        <h6>Geo. širina: {{ post.geografska_sirina }}</h6>
+        <q-separator color="white" />
+        <h6>Geo. dužina: {{ post.geografska_duzina }}</h6>
     </div>
-
+  </div>
+</div>
 
 
     <q-card-section>
@@ -56,10 +57,9 @@
     </q-card-section>
 
     <q-separator />
-
-    <div class="q-pa-md row items-start q-gutter-xs">
+    
+<div class="q-pa-md row items-start q-gutter-xs">
       <h5 style="color: white">Komentari:</h5></div>
-
     <div class="q-pa-md row items-start q-gutter-md">
       <q-card v-for="post in 6" :key="post" class="my-card" flat bordered>
         <q-item>
@@ -145,4 +145,11 @@ onMounted(() => {
   width: 100%
   max-width: 800px
 
+</style>
+
+<style>
+.post-text {
+  max-width: 620px;
+  word-wrap: break-word;
+}
 </style>
