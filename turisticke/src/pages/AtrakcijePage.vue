@@ -40,6 +40,8 @@
         <q-separator color="white" />
         <h6>Ocjena:</h6>
         <q-rating v-model=post.prosjecna_ocjena :max="5" :readonly="true" size="32px" />
+        <q-btn round color="black" icon="delete" style="right: -12px"
+        @click="deleteOcjena(post.id_atrakcije)"/>
         <q-separator color="white" />
         <h6>Geo. širina: {{ post.geografska_sirina }}</h6>
         <q-separator color="white" />
@@ -124,7 +126,17 @@ try {
   getPosts();
 }
 
-
+const deleteOcjena = async (id) => {
+try {
+  //const response = await api.delete('atrakcije/${id}');
+  const response = await api.delete(`http://localhost:4200/obrisi_ocjenu_atrakcije/${id}`);
+  console.log(response.data);
+  // Perform any additional actions after successful deletion
+} catch (error) {
+  console.log(error);
+}
+  getPosts();
+}
 
 
 onMounted(() => {
