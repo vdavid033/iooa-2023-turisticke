@@ -41,7 +41,7 @@
 </div>
 </template>
 
-<script>
+<script >
 
 /*
 import { ref } from 'vue'
@@ -71,13 +71,13 @@ export default {
   }
 }
 
-/*
+</script>
+<script setup>
 const inputOpis = ref('')
 const inputDuzina = ref('')
 const inputSirina = ref('')
 const inputLokacija = ref('')
 const inputNaziv = ref('')
-*/
 </script>
 <style>
 .bg-image {
