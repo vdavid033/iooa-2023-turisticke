@@ -6,21 +6,21 @@
         <div class="q-gutter-md full-with" style="max-width: 500px">
         <div class="full-with">
     <div class="q-gutter-md" style="max-width: 350px">
-      <q-input v-model="inputNaziv" label="Naziv" placeholder="Naziv atrakcije">
+      <q-input ref="nazivRef" v-model="inputNaziv" label="Naziv" placeholder="Naziv atrakcije">
       </q-input>
 
-      <q-input v-model="inputOpis" label="Opis" placeholder="Opis atrakcije">
+      <q-input ref="opisRef" v-model="inputOpis" label="Opis" placeholder="Opis atrakcije">
       </q-input>
 
-      <q-input v-model="inputLokacija" label="Lokacija" placeholder="Lokacija atrakcije">
+      <q-input ref="adresaRef" v-model="inputLokacija" label="Lokacija" placeholder="Lokacija atrakcije">
       </q-input>
 
             <q-uploader url="http://localhost:8080/upload" label="Slika atrakcije" style="max-width: 300px" />
 
-      <q-input v-model="inputSirina" label="Širina" placeholder="Grografska Širina atr">
+      <q-input ref="sirinaRef" v-model="inputSirina" label="Širina" placeholder="Grografska Širina atr">
       </q-input>
 
-      <q-input v-model="inputDuzina" label="Dužina" placeholder="Geografska dužina atr">
+      <q-input ref="duzinaRef" v-model="inputDuzina" label="Dužina" placeholder="Geografska dužina atr">
       </q-input>
       <div class="row justify-center q-pa-md">
         <div class="row justify-center q-pa-md">
@@ -35,6 +35,20 @@
     </div>
   </div>
 </div>
+<q-dialog v-model="showDialog">
+      <q-card>
+        <q-card-section> Predmet je uspješno dodan! </q-card-section>
+        <q-card-actions align="right">
+          <q-btn
+            flat
+            label="Close"
+            color="primary"
+            v-close-popup
+            @click="closeAndReload"
+          />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
 </q-card-section>
   </q-card>
 </q-page>
@@ -42,6 +56,8 @@
 </template>
 
 <script>
+// eslint-disable-next-line no-unused-vars
+import { QDialog } from 'quasar'
 // eslint-disable-next-line no-unused-vars
 import { ref } from 'vue'
 import axios from 'axios' // Import axios
@@ -57,6 +73,24 @@ export default {
   },
   methods: {
 
+    resetForm () {
+      this.inputNaziv = ''
+      this.inputOpis = ''
+      this.inputDuzina = ''
+      this.inputSirina = ''
+      this.inputLokacija = ''
+      this.$refs.nazivRef.resetValidation()
+      this.$refs.opisRef.resetValidation()
+      this.$refs.duzinaRef.resetValidation()
+      this.$refs.sirinaRef.resetValidation()
+      this.$refs.adresaRef.resetValidation()
+    },
+
+    closeAndReload () {
+      this.showDialog = false
+      window.location.reload()
+    },
+
     async submitForm () {
       const sampleData = {
         naziv: this.inputNaziv,
@@ -71,6 +105,8 @@ export default {
           sampleData
         )
         console.log(response.data)
+        this.showDialog = true
+        this.resetForm()
       } catch (error) {
         console.error(error)
       }
