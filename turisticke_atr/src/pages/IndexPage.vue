@@ -12,7 +12,7 @@
       <q-input ref="opisRef" v-model="inputOpis" label="Opis" placeholder="Opis atrakcije">
       </q-input>
 
-      <q-input ref="adresaRef" v-model="inputLokacija" label="Lokacija" placeholder="Lokacija atrakcije">
+      <q-input ref="adresaRef" v-model="inputAdresa" label="Adresa" placeholder="Adresa atrakcije">
       </q-input>
 
             <q-uploader url="http://localhost:8080/upload" label="Slika atrakcije" style="max-width: 300px" />
@@ -68,7 +68,7 @@ export default {
       inputOpis: '',
       inputDuzina: '',
       inputSirina: '',
-      inputLokacija: ''
+      inputAdresa: ''
     }
   },
   methods: {
@@ -78,7 +78,7 @@ export default {
       this.inputOpis = ''
       this.inputDuzina = ''
       this.inputSirina = ''
-      this.inputLokacija = ''
+      this.inputAdresa = ''
       this.$refs.nazivRef.resetValidation()
       this.$refs.opisRef.resetValidation()
       this.$refs.duzinaRef.resetValidation()
@@ -97,7 +97,7 @@ export default {
         opis: this.inputOpis,
         geografska_duzina: this.inputDuzina,
         geografska_sirina: this.inputSirina,
-        adresa: this.inputLokacija
+        adresa: this.inputAdresa
       }
       try {
         const response = await axios.post(
@@ -120,7 +120,7 @@ export default {
 const inputDuzina = ref('')
 const inputOpis = ref('')
 const inputSirina = ref('')
-const inputLokacija = ref('')
+const inputAdresa = ref('')
 const inputNaziv = ref('')
 </script>
 -->
