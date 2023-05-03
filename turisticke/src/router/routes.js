@@ -9,11 +9,20 @@ const routes = [
 
     ],
   },
+
+  {
+    path: "/auth",
+    component: () => import("layouts/BlankLayout.vue"),
+    children: [
+      { path: "", component: () => import("pages/LoginPage.vue") },
+    ],
+  },
+
   {
     path: "/",
     component: () => import("layouts/BlankLayout.vue"),
     children: [
-
+      { path: "axo", component: () => import("pages/AxiosPageTest.vue") },
       { path: "auth", component: () => import("pages/LoginPage.vue") },
 
 
