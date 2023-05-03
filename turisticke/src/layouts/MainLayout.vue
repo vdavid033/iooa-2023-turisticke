@@ -45,6 +45,13 @@ const linksList = [
     target: "_self",
   },
   {
+    title: "Unos atrakcija",
+    caption: "nos novih atrakcija",
+    icon: "swap_horizontal_circle",
+    link: "unos",
+    target: "_self",
+  },
+  {
     title: "Testiranje Axiosa",
     caption: "služi za testiranje Axiosa",
     icon: "swap_horizontal_circle",

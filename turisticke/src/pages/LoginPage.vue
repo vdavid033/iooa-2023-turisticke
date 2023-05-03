@@ -10,7 +10,7 @@
   <q-card class="my-card">
     <q-card-section>
       <form @submit.prevent="onSubmit">
-        <div class="q-gutter-y-md">
+        <div class="q-gutter-md full-with" style="max-width: 500px">
           <div class="loginText" style="text-align: center">{{ tab }}</div>
 
           <q-input v-model="credentials.email" class="input" outlined label="Email" />

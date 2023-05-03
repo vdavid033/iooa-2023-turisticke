@@ -2,22 +2,24 @@ const routes = [
   {
     path: "/",
     component: () => import("layouts/MainLayout.vue"),
-    children: [{ path: "", component: () => import("pages/IndexPage.vue") }],
-  },
-  {
-    path: "/auth",
-    component: () => import("layouts/BlankLayout.vue"),
     children: [
-      { path: "", component: () => import("pages/LoginPage.vue") },
+      { path: "", component: () => import("pages/IndexPage.vue") },
+      { path: "unos", component: () => import("pages/Unos_atrakcija.vue")},
+      { path: "axo", component: () => import("pages/AxiosPageTest.vue") },
+
     ],
   },
   {
     path: "/",
     component: () => import("layouts/BlankLayout.vue"),
     children: [
-      { path: "axo", component: () => import("pages/AxiosPageTest.vue") },
+
+      { path: "auth", component: () => import("pages/LoginPage.vue") },
+
+
     ],
   },
+
   {
     path: "/one_atraction",
     component: () => import("layouts/BlankLayout.vue"),
