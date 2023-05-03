@@ -37,7 +37,7 @@
 </div>
 <q-dialog v-model="showDialog">
       <q-card>
-        <q-card-section> Predmet je uspješno dodan! </q-card-section>
+        <q-card-section> Atrakcija je uspješno dodana! </q-card-section>
         <q-card-actions align="right">
           <q-btn
             flat
