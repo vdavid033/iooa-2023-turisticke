@@ -32,20 +32,22 @@
 
     <div class="q-pa-md">
       <div class="q-pa-md items-start q-gutter-xs" style="background-color: black; color: white;">
-        <h6>Opis:</h6>
+        <p style="font-size: 20px;">Opis:</p>
         <div class="post-text">{{ post.opis }}</div>
         <q-separator color="white" />
-        <h6>Adresa:</h6>
+        <p style="font-size: 20px;">Adresa:</p>
         <h7>{{ post.adresa }}</h7>
         <q-separator color="white" />
-        <h6>Ocjena:</h6>
+        <p style="font-size: 20px;">Ocjena:</p>
         <q-rating v-model=post.prosjecna_ocjena :max="5" :readonly="true" size="32px" />
         <q-btn round color="black" icon="delete" style="right: -12px"
         @click="deleteOcjena(post.id_atrakcije)"/>
         <q-separator color="white" />
-        <h6>Geo. širina: {{ post.geografska_sirina }}</h6>
+        <p style="font-size: 20px;">Geografska dužina:</p>
+        <p style="font-size: 15px;">{{ post.geografska_sirina }}</p>
         <q-separator color="white" />
-        <h6>Geo. dužina: {{ post.geografska_duzina }}</h6>
+        <p style="font-size: 20px;">Geografska širina:</p>
+        <p style="font-size: 15px;">{{ post.geografska_duzina }}</p>
     </div>
   </div>
 </div>
@@ -59,9 +61,9 @@
     </q-card-section>
 
     <q-separator />
-    
+
 <div class="q-pa-md row items-start q-gutter-xs">
-      <h5 style="color: white">Komentari:</h5></div>
+      <p style="font-size: 25px; color: white">Komentari:</p></div>
     <div class="q-pa-md row items-start q-gutter-md">
       <q-card v-for="post in 6" :key="post" class="my-card" flat bordered>
         <q-item>
