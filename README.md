@@ -1,8 +1,11 @@
 # iooa-2023-turisticke
 
-- Klonirati GitHub repozitorij lokalno
-- lokalno se prebaciti u granu od tima
-- lokalno napraviti izmjenu i potvrditi je (add, commit)
-- dohvatiti zadnje izmjene s udaljenog repozitorija (pull)
-- napraviti spajanje s vašim izmjenama (merge, add, commit)
-- prebaciti izmjene na GitHub (push)
+
+    Klonirati GitHub repozitorij lokalno
+    lokalno se prebaciti u granu od tima
+    lokalno napraviti izmjenu i potvrditi je (add, commit)
+    dohvatiti zadnje izmjene s udaljenog repozitorija (pull)
+    napraviti spajanje s vašim izmjenama (merge, add, commit)
+    prebaciti izmjene na GitHub (push)
+
+    test Borna Crnkovic
