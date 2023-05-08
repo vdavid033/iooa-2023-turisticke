@@ -30,7 +30,7 @@ import {api} from 'boot/axios'
 export default {
   data() {
     return {
-      newComment: ''
+      noviKomentar: ''
     }
   },
   methods: {
@@ -59,8 +59,9 @@ export default {
 
 <style scoped>
 .text {
-  width: 100%;
+  width: 98%;
   height: 100px;
+  margin-left: 5px;
   margin-bottom: 10px;
   padding-top: 15px;
   border: 1px solid #ccc;
@@ -81,6 +82,6 @@ button {
 }
 
 button:hover {
-  background-color: #3e8e41;
+  background-color: #ffa702;
 }
 </style>
