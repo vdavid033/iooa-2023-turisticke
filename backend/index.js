@@ -25,7 +25,7 @@ var dbConn = mysql.createConnection({
 });
 
 //spajanje s bazom
-dbConn.connect();
+dbConn.connect()
 
 
 
@@ -142,21 +142,12 @@ app.delete('/obrisi_atrakcije/:id', function (request, response){
     });
   });
 
-
-
-
-
   app.delete('/obrisi_sliku_atrakcije/:id', function (request, response){
-
-    
     let id_atrakcije = request.params.id;
-  
     console.log(`Received request to delete atrakcija with id: ${id_atrakcije}`); // Log the received id
-  
     if (!id_atrakcije) {
       return response.status(400).send({ error: true, message: 'nedostaje id atrakcije' });
     }
-  
    const deleteQuery = "UPDATE atrakcije SET slika = NULL WHERE id_atrakcije = ?";
      //const deleteQuery = "DELETE  FROM atrakcije WHERE id_atrakcije = '${id}'";
     dbConn.query(deleteQuery, [id_atrakcije], function (error, results) {
@@ -164,38 +155,29 @@ app.delete('/obrisi_atrakcije/:id', function (request, response){
         console.log(`Error when executing the delete query: ${error}`); // Log any error from the query
         throw error;
       }
-  
       console.log('Deletion result: ${JSON.stringify(results)}'); // Log the result of the deletion
   
       return response.send({ error: false, data: results, message: 'slika atrakcija je obrisana ' });
     });
   });
 
-/*
-  app.put('/dodaj_sliku_atrakcije/:id', function (request, response){
-
-    
-    let id_atrakcije = request.params.id;
-  
-    console.log(`Received request to delete atrakcija with id: ${id_atrakcije}`); // Log the received id
-  
-    if (!id_atrakcije) {
-      return response.status(400).send({ error: true, message: 'nedostaje id atrakcije' });
-    }
-  
-   const deleteQuery = "UPDATE atrakcije SET slika = ? WHERE id_atrakcije = ?";
-     //const deleteQuery = "DELETE  FROM atrakcije WHERE id_atrakcije = '${id}'";
-    dbConn.query(deleteQuery,[slika],[id_atrakcije], function (error, results) {
-      if (error) {
-        console.log(`Error when executing the delete query: ${error}`); // Log any error from the query
-        throw error;
+  // Dodavanje ocjene za atrakciju
+ 
+  app.put('/dodajOcjenu/:id', (req, res) => {
+    const data = [req.body.prosjecna_ocjena, req.params.id]
+    dbConn.query("UPDATE atrakcije SET prosjecna_ocjena = ? WHERE id_atrakcije = ?", data,(err,result)=>{
+      if(err){
+        res.send('Error')
+      }else{
+        res.send(result)
       }
+    })
+  });
+
   
-      console.log('Deletion result: ${JSON.stringify(results)}'); // Log the result of the deletion
-  
-      return response.send({ error: false, data: results, message: 'slika atrakcija je obrisana ' });
-    });
-  });*/
+
+
+
 
 
   app.delete('/obrisi_ocjenu_atrakcije/:id', function (request, response){
