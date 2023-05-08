@@ -6,7 +6,7 @@
         <div class="q-gutter-md full-with" style="max-width: 500px">
         <div class="full-with">
     <div class="q-gutter-md" style="max-width: 350px">
-      <p  class="text-h5 text-weight-light text-center">Unos nove atrakcije</p>
+      <p  class="text-h5 text-weight-light text-center" style="color:#2196F3">Unos nove atrakcije</p>
       <q-input ref="nazivRef" v-model="inputNaziv" label="Naziv" placeholder="Naziv atrakcije">
       </q-input>
 
