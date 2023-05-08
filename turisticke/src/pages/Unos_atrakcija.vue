@@ -16,7 +16,7 @@
       <q-input ref="adresaRef" v-model="inputAdresa" label="Adresa" placeholder="Adresa atrakcije">
       </q-input>
 
-      <q-input ref="slikaRef" v-model="inputSlika" label="Slika" placeholder="URL slike">
+      <q-input ref="slikaRef" v-model="inputSlika" label="Slika" placeholder="https://stranica/slika.jpg">
       </q-input>
 
       <q-input ref="sirinaRef" v-model="inputSirina" label="Širina" placeholder="Grografska Širina atr">
