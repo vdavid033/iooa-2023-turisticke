@@ -3,13 +3,16 @@
 
   <h3>Unos komentara</h3>
   <h6>U polje ispod upišite svoj komentar o atrakciji</h6>
-  <q-form @submit.prevent="addComment">
-      <textarea v-model="newComment" placeholder="Unesite svoj komentar"></textarea>
-      
+  <q-form class="text">
+      <!-- <textarea v-model="newComment" placeholder="Unesite svoj komentar..."></textarea> -->
+      <q-input filled v-model="noviKomentar" label="Unesi svoj komentar.. " :dense="dense" />
+
     </q-form>
 
+    
     <q-card-section>  
-      <q-btn type="submit">DODAJ KOMENTAR</q-btn>
+      <q-btn label="Dodaj komentar"
+          @click="submitForm"/>
     </q-card-section>
 
 
@@ -22,16 +25,31 @@
 </template>
 
 <script>
+import { ref } from 'vue'
+import {api} from 'boot/axios' 
 export default {
   data() {
     return {
-      newComment: ''
+      noviKomentar: ''
     }
   },
   methods: {
-    addComment() {
-      // Ovdje dodajte kod za spremanje komentara u bazu podataka
-      this.newComment = '' // Resetiranje teksta u tekstnom okviru
+ 
+    async submitForm () {
+      const sampleData = {
+        noviKomentar:this.noviKomentar
+      }
+      try {
+        const response = await api.post(
+          '/komentari',
+          sampleData
+        )
+        console.log(response.data)
+        // this.showDialog = true
+        // this.resetForm()
+      } catch (error) {
+        console.error(error)
+      }
     }
   }
 }
@@ -40,13 +58,17 @@ export default {
 
 
 <style scoped>
-textarea {
-  width: 100%;
+.text {
+  width: 98%;
   height: 100px;
+  margin-left: 5px;
   margin-bottom: 10px;
-  padding: 5px;
+  padding-top: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  background-color: rgb(228, 233, 234);
+  
+  
 }
 
 button {
@@ -60,6 +82,6 @@ button {
 }
 
 button:hover {
-  background-color: #3e8e41;
+  background-color: #ffa702;
 }
 </style>
