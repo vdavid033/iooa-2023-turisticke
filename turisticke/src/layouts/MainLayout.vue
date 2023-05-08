@@ -41,7 +41,7 @@ const linksList = [
     title: "Moje atrakcije",
     caption: "popis mojih atrakcija",
     icon: "favorite",
-    link: "index",
+    link: "/",
     target: "_self",
   },
   {
@@ -58,30 +58,7 @@ const linksList = [
     link: "axo",
     target: "_self",
   },
-  // {
-  //   title: "",
-  //   caption: "forum.quasar.dev",
-  //   icon: "record_voice_over",
-  //   link: "https://forum.quasar.dev",
-  // },
-  // {
-  //   title: "",
-  //   caption: "@quasarframework",
-  //   icon: "rss_feed",
-  //   link: "https://twitter.quasar.dev",
-  // },
-  // {
-  //   title: "",
-  //   caption: "@QuasarFramework",
-  //   icon: "public",
-  //   link: "https://facebook.quasar.dev",
-  // },
-  // {
-  //   title: "",
-  //   caption: "Community Quasar projects",
-  //   icon: "favorite",
-  //   link: "https://awesome.quasar.dev",
-  // },
+
 ];
 
 export default defineComponent({
