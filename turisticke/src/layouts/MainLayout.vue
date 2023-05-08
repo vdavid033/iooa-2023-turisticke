@@ -41,7 +41,7 @@ const linksList = [
     title: "Moje atrakcije",
     caption: "popis mojih atrakcija",
     icon: "favorite",
-    link: "",
+    link: "index",
     target: "_self",
   },
   {
