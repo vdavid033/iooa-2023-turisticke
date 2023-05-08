@@ -107,7 +107,7 @@ export default {
       }
       try {
         const response = await axios.post(
-          'http://localhost:3000/unosAtrakcija',
+          'http://localhost:4200/unosAtrakcija',
           sampleData
         )
         console.log(response.data)

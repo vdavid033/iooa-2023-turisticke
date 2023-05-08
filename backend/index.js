@@ -12,8 +12,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false })); 
 const dbConfig = require("./dbConfig");
 
-
 app.use(cors());
+const cors = require('cors');
+app.use(cors({
+    origin: 'http://localhost:9000'
+}));
+
 
 
 
@@ -41,6 +45,18 @@ app.use(function (req, res, next) {
 });
 // kraj fix-a
 */
+
+
+app.post('/unosAtrakcija', function (request, response) {
+  const data = request.body;
+  atrakcija = [[data.naziv, data.opis, data.slika, data.prosjecna_ocjena, data.geografska_duzina, data.geografska_sirina, data.adresa]]
+  
+  dbConn.query('INSERT INTO atrakcije (naziv, opis, slika, prosjecna_ocjena, geografska_duzina, geografska_sirina, adresa ) VALUES ? ',
+  [atrakcija], function (error, results, fields) {
+  if (error) throw error;
+  return response.send({ error: false, data: results, message:'Atrakcija unesena.' });
+  });
+});
 
 
 
@@ -222,6 +238,7 @@ app.delete('/obrisi_atrakcije/:id', function (request, response){
       return response.send({ error: false, data: results, message: 'ocjena atrakcija je obrisana ' });
     });
   });
+
 
 
 //port na kojem je app
