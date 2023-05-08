@@ -1,11 +1,12 @@
 <template>
   <div class="bg-image">
   <q-page padding class="flex flex-center">
-    <q-card>
+    <q-card style="width: 350px;">
       <q-card-section>
         <div class="q-gutter-md full-with" style="max-width: 500px">
         <div class="full-with">
     <div class="q-gutter-md" style="max-width: 350px">
+      <p  class="text-h5 text-weight-light text-center">Unos nove atrakcije</p>
       <q-input ref="nazivRef" v-model="inputNaziv" label="Naziv" placeholder="Naziv atrakcije">
       </q-input>
 
@@ -15,7 +16,8 @@
       <q-input ref="adresaRef" v-model="inputAdresa" label="Adresa" placeholder="Adresa atrakcije">
       </q-input>
 
-            <q-uploader url="http://localhost:8080/upload" label="Slika atrakcije" style="max-width: 300px" />
+      <q-input ref="slikaRef" v-model="inputSlika" label="Slika" placeholder="URL slike">
+      </q-input>
 
       <q-input ref="sirinaRef" v-model="inputSirina" label="Širina" placeholder="Grografska Širina atr">
       </q-input>
@@ -41,7 +43,7 @@
         <q-card-actions align="right">
           <q-btn
             flat
-            label="Close"
+            label="Ok"
             color="primary"
             v-close-popup
             @click="closeAndReload"
@@ -68,7 +70,8 @@ export default {
       inputOpis: '',
       inputDuzina: '',
       inputSirina: '',
-      inputAdresa: ''
+      inputAdresa: '',
+      inputSlika: ''
     }
   },
   methods: {
@@ -79,6 +82,8 @@ export default {
       this.inputDuzina = ''
       this.inputSirina = ''
       this.inputAdresa = ''
+      this.inputSlika = ''
+      this.$refs.slikaRef.resetValidation()
       this.$refs.nazivRef.resetValidation()
       this.$refs.opisRef.resetValidation()
       this.$refs.duzinaRef.resetValidation()
@@ -95,6 +100,7 @@ export default {
       const sampleData = {
         naziv: this.inputNaziv,
         opis: this.inputOpis,
+        slika: this.inputSlika,
         geografska_duzina: this.inputDuzina,
         geografska_sirina: this.inputSirina,
         adresa: this.inputAdresa
