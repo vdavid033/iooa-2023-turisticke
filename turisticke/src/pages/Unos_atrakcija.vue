@@ -1,26 +1,28 @@
 <template>
-<div class="bg-image">
+  <div class="bg-image">
   <q-page padding class="flex flex-center">
-    <q-card>
+    <q-card style="width: 350px;">
       <q-card-section>
         <div class="q-gutter-md full-with" style="max-width: 500px">
         <div class="full-with">
     <div class="q-gutter-md" style="max-width: 350px">
-      <q-input v-model="inputNaziv" label="Naziv" placeholder="Naziv atrakcije">
+      <p  class="text-h5 text-weight-light text-center" style="color:#2196F3">Unos nove atrakcije</p>
+      <q-input ref="nazivRef" v-model="inputNaziv" label="Naziv" placeholder="Naziv atrakcije">
       </q-input>
 
-      <q-input v-model="inputOpis" label="Opis" placeholder="Opis atrakcije">
+      <q-input ref="opisRef" v-model="inputOpis" label="Opis" placeholder="Opis atrakcije">
       </q-input>
 
-      <q-input v-model="inputLokacija" label="Lokacija" placeholder="Lokacija atrakcije">
+      <q-input ref="adresaRef" v-model="inputAdresa" label="Adresa" placeholder="Adresa atrakcije">
       </q-input>
 
-            <q-uploader url="http://localhost:8080/upload" label="Slika atrakcije" style="max-width: 300px" />
-
-      <q-input v-model="inputSirina" label="Širina" placeholder="Grografska Širina atr">
+      <q-input ref="slikaRef" v-model="inputSlika" label="Slika" placeholder="URL slike">
       </q-input>
 
-      <q-input v-model="inputDuzina" label="Dužina" placeholder="Geografska dužina atr">
+      <q-input ref="sirinaRef" v-model="inputSirina" label="Širina" placeholder="Grografska Širina atr">
+      </q-input>
+
+      <q-input ref="duzinaRef" v-model="inputDuzina" label="Dužina" placeholder="Geografska dužina atr">
       </q-input>
       <div class="row justify-center q-pa-md">
         <div class="row justify-center q-pa-md">
@@ -35,6 +37,20 @@
     </div>
   </div>
 </div>
+<q-dialog v-model="showDialog">
+      <q-card>
+        <q-card-section> Atrakcija je uspješno dodana! </q-card-section>
+        <q-card-actions align="right">
+          <q-btn
+            flat
+            label="Ok"
+            color="primary"
+            v-close-popup
+            @click="closeAndReload"
+          />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
 </q-card-section>
   </q-card>
 </q-page>
@@ -42,6 +58,8 @@
 </template>
 
 <script>
+// eslint-disable-next-line no-unused-vars
+import { QDialog } from 'quasar'
 // eslint-disable-next-line no-unused-vars
 import { ref } from 'vue'
 import axios from 'axios' // Import axios
@@ -52,18 +70,40 @@ export default {
       inputOpis: '',
       inputDuzina: '',
       inputSirina: '',
-      inputLokacija: ''
+      inputAdresa: '',
+      inputSlika: ''
     }
   },
   methods: {
+
+    resetForm () {
+      this.inputNaziv = ''
+      this.inputOpis = ''
+      this.inputDuzina = ''
+      this.inputSirina = ''
+      this.inputAdresa = ''
+      this.inputSlika = ''
+      this.$refs.slikaRef.resetValidation()
+      this.$refs.nazivRef.resetValidation()
+      this.$refs.opisRef.resetValidation()
+      this.$refs.duzinaRef.resetValidation()
+      this.$refs.sirinaRef.resetValidation()
+      this.$refs.adresaRef.resetValidation()
+    },
+
+    closeAndReload () {
+      this.showDialog = false
+      window.location.reload()
+    },
 
     async submitForm () {
       const sampleData = {
         naziv: this.inputNaziv,
         opis: this.inputOpis,
+        slika: this.inputSlika,
         geografska_duzina: this.inputDuzina,
         geografska_sirina: this.inputSirina,
-        adresa: this.inputLokacija
+        adresa: this.inputAdresa
       }
       try {
         const response = await axios.post(
@@ -71,6 +111,8 @@ export default {
           sampleData
         )
         console.log(response.data)
+        this.showDialog = true
+        this.resetForm()
       } catch (error) {
         console.error(error)
       }
@@ -85,13 +127,3 @@ export default {
 
   }
 </style>
-<!--
-<script setup>
-const inputDuzina = ref('')
-const inputOpis = ref('')
-const inputSirina = ref('')
-const inputLokacija = ref('')
-const inputNaziv = ref('')
-</script>
--->
-
