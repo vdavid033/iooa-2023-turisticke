@@ -9,7 +9,7 @@
           <div class="q-pa-md">
             <q-btn-dropdown color="black" label="Uredi sliku">
               <q-list>
-                <q-item clickable v-close-popup @click="$router.push('/slika')">
+                <q-item clickable v-close-popup>
                   <q-item-section>
                     <q-item-label>Dodaj sliku</q-item-label>
                   </q-item-section>
@@ -76,12 +76,28 @@
 
               </q-list>
             </q-btn-dropdown>
+
           </div>
+
+
+
+
 
 
 
           <q-btn round color="black" icon="delete" style="right: -12px" @click="deleteOcjena(post.id_atrakcije)" />
           <q-separator color="white" />
+
+          <div class="" style="max-width: 400px">
+
+            <q-form @click="spremiSliku(name, post.id_atrakcije)" class="q-gutter-md">
+              <q-input class="bg-light-blue-11" filled v-model="name" label="Link *" hint="Dodaj link na sliku" />
+              <div>
+                <q-btn label="Spremi sliku" type="submit" color="primary" />
+              </div>
+            </q-form>
+
+          </div>
           <p style="font-size: 20px;">Geografska dužina:</p>
           <p style="font-size: 15px;">{{ post.geografska_sirina }}</p>
           <q-separator color="white" />
@@ -90,6 +106,7 @@
         </div>
       </div>
     </div>
+
 
 
     <q-card-section>
@@ -153,6 +170,29 @@ const getPosts = async () => {
   }
 }
 
+
+//Dodavanje slike
+
+const spremiSliku = async (link, id) => {
+  console.log("OnSubmit: ", link, id)
+
+  try {
+
+    const response = await api.put(`http://localhost:4200/dodajSliku/${id}`, {
+      slika: link
+    });
+    console.log(response.data);
+
+
+  }
+  catch (error) {
+    console.log(error);
+  }
+  getPosts();
+
+
+
+}
 
 //Dodavanje ocjene za atrakciju
 

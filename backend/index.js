@@ -174,6 +174,20 @@ app.delete('/obrisi_atrakcije/:id', function (request, response){
     })
   });
 
+
+   // Dodavanje slike za atrakciju
+ 
+   app.put('/dodajSliku/:id', (req, res) => {
+    const data = [req.body.slika, req.params.id]
+    dbConn.query("UPDATE atrakcije SET slika = ? WHERE id_atrakcije = ?", data,(err,result)=>{
+      if(err){
+        res.send('Error')
+      }else{
+        res.send(result)
+      }
+    })
+  });
+
   
 
 
