@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const dbConfig = require("./dbConfig");
 
 app.use(cors());
-const cors = require('cors');
+//const cors = require('cors');
 app.use(cors({
     origin: 'http://localhost:9000'
 }));
