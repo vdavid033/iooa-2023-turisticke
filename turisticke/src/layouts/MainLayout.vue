@@ -5,7 +5,7 @@
         <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
 
         <q-toolbar-title>
-          <div class="text-h6"><b>Turističke atrakcije</b></div>
+          <div class="text-h6"><b>TURISTIČKE ATRAKCIJE</b></div>
         </q-toolbar-title>
 
         <div>Bad Developers</div>
@@ -14,7 +14,7 @@
 
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
       <q-list>
-        <q-item-label header> Izbornik </q-item-label>
+        <q-item-label header> IZBORNIK </q-item-label>
 
         <EssentialLink v-for="link in essentialLinks" :key="link.title" v-bind="link" />
       </q-list>
@@ -32,21 +32,22 @@ import EssentialLink from "components/EssentialLink.vue";
 
 const linksList = [
   {
-    title: "Prijava",
+    title: "Prijava u sustav",
+    caption: "Korisničko ime i lozinka",
     icon: "login",
     link: "auth",
     target: "_self",
   },
   {
     title: "Moje atrakcije",
-    caption: "popis mojih atrakcija",
+    caption: "Popis mojih atrakcija",
     icon: "favorite",
     link: "/",
     target: "_self",
   },
   {
     title: "Unos atrakcija",
-    caption: "nos novih atrakcija",
+    caption: "Unos novih atrakcija",
     icon: "swap_horizontal_circle",
     link: "unos",
     target: "_self",
