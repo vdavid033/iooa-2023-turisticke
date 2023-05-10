@@ -9,15 +9,20 @@
           <div class="q-pa-md">
             <q-btn-dropdown color="black" label="Uredi sliku">
               <q-list>
-                <q-item clickable v-close-popup>
+
                   <q-item-section>
-                    <q-item-label>Dodaj sliku</q-item-label>
+                    <q-form @click="spremiSliku(name, post.id_atrakcije)" class="q-gutter-md">
+              <q-input class="bg-light-blue-11" filled v-model="name" label="Zalijepi link nove slike" />
+              <div style="display: flex; justify-content: center; align-items: center;">
+                <q-btn class="" label="Spremi sliku" type="submit" color="primary" />
+              </div>
+            </q-form>
                   </q-item-section>
-                </q-item>
+
 
                 <q-item clickable v-close-popup @click="obrisi_sliku(post.id_atrakcije)">
                   <q-item-section>
-                    <q-item-label>Obriši sliku</q-item-label>
+                    <q-item-label style="display: flex; justify-content: center; align-items: center;">OBRIŠI SLIKU</q-item-label>
                   </q-item-section>
                 </q-item>
               </q-list>
@@ -42,8 +47,11 @@
           <q-rating @click="dodajOcjenu(post.id_atrakcije, post.prosjecna_ocjena)" v-model=post.prosjecna_ocjena :max="5"
             :readonly="true" size="32px" />
 
+            <q-btn round color="black" icon="delete" style="right: -12px" @click="deleteOcjena(post.id_atrakcije)" />
+          
+
           <div class="q-pa-md">
-            <q-btn-dropdown color="primary" label="Ocijena">
+            <q-btn-dropdown color="primary" label="Promijeni ocjenu">
               <q-list>
                 <q-item clickable v-close-popup @click="dodajOcjenu(1, post.id_atrakcije)">
                   <q-item-section>
@@ -79,25 +87,10 @@
 
           </div>
 
-
-
-
-
-
-
-          <q-btn round color="black" icon="delete" style="right: -12px" @click="deleteOcjena(post.id_atrakcije)" />
           <q-separator color="white" />
 
-          <div class="" style="max-width: 400px">
+          <div class="" style="max-width: 400px"></div>
 
-            <q-form @click="spremiSliku(name, post.id_atrakcije)" class="q-gutter-md">
-              <q-input class="bg-light-blue-11" filled v-model="name" label="Link *" hint="Dodaj link na sliku" />
-              <div>
-                <q-btn label="Spremi sliku" type="submit" color="primary" />
-              </div>
-            </q-form>
-
-          </div>
           <p style="font-size: 20px;">Geografska dužina:</p>
           <p style="font-size: 15px;">{{ post.geografska_sirina }}</p>
           <q-separator color="white" />

@@ -51,13 +51,13 @@ const linksList = [
     link: "unos",
     target: "_self",
   },
-  {
+  /*{
     title: "Testiranje Axiosa",
     caption: "služi za testiranje Axiosa",
     icon: "swap_horizontal_circle",
     link: "axo",
     target: "_self",
-  },
+  },*/
 
 ];
 
