@@ -107,6 +107,7 @@
     </q-card-section>
     <q-card-section>
             <q-btn color="black" :to="'/komentari/' + trenutniID" label="Dodaj komentar" />
+            
         </q-card-section>
 
     <q-separator />

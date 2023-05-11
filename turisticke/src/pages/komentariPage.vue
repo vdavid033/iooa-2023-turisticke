@@ -78,6 +78,6 @@ button {
 }
 
 button:hover {
-  background-color: #ffa702;
+  background-color: #ff9900;
 }
 </style>
