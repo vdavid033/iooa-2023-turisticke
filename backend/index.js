@@ -220,6 +220,48 @@ app.delete('/obrisi_atrakcije/:id', function (request, response){
   });
 
 
+
+//brisanje komentara
+
+app.delete('/obrisi_komentar/:id', function (request, response){
+
+    
+    let id_komentara = request.params.id;
+  
+    console.log(`Received request to delete komentar with id: ${id_komentara}`); // Log the received id
+  
+    if (!id_komentara) {
+      return response.status(400).send({ error: true, message: 'nedostaje id komentara' });
+    }
+  
+   const deleteQuery = "DELETE  FROM Komentari WHERE ID_komentara = ?";
+    dbConn.query(deleteQuery, [id_komentara], function (error, results) {
+      if (error) {
+        console.log(`Error when executing the delete query: ${error}`); // Log any error from the query
+        throw error;
+      }
+  
+      console.log('Deletion result: ${JSON.stringify(results)}'); // Log the result of the deletion
+  
+      return response.send({ error: false, data: results, message: 'komentar je obrisan obrisi komentar.' });
+    });
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //port na kojem je app
 app.listen(4200, function () {
 console.log('Node app is running on port 4200');
