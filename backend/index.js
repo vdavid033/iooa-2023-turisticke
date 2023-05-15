@@ -67,6 +67,22 @@ app.get("/komentari", function (request, response) {
     });
 });
 
+// Dodavanje komentara za atrakciju po ID-u
+ 
+app.post('/dodajKomentar/:id', (req, res) => {
+  const data = [req.body.Komentar, req.params.id]
+  dbConn.query("INSERT INTO Komentari( Komentar, VK_ID_atrakcije) VALUES (?,?)", data,(err,result)=>{
+    if(err){
+      res.send('Error')
+    }else{
+      res.send(result)
+    }
+  })
+});
+
+
+
+
 //uzimanje podataka o korisnicima
 app.get("/korisnici", function (request, response) {
     dbConn.query("SELECT * FROM korisnici", function (error, results, fields) {
