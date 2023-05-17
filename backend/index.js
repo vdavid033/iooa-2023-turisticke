@@ -67,6 +67,19 @@ app.get("/komentari", function (request, response) {
     });
 });
 
+
+app.get('/komentari/:id', function (request, response) {
+  let id_atrakcije = request.params.id;
+  dbConn.query("SELECT * FROM Komentari WHERE VK_ID_atrakcije=?", id_atrakcije, function (error, results, fields) {
+      if (error) throw error;
+      return response.send({
+          error: false,
+          data: results,
+          message: "lista komentara.",
+      });
+  });
+});
+
 // Dodavanje komentara za atrakciju po ID-u
  
 app.post('/dodajKomentar/:id', (req, res) => {
