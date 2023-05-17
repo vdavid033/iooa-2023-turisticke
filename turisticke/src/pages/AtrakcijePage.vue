@@ -103,10 +103,10 @@
 
 
     <q-card-section>
-      <q-btn color="black" @click="$router.push('/')" label="Natrag na početnu" />
+      <q-btn class="button" @click="$router.push('/')" label="Natrag na početnu" />
     </q-card-section>
     <q-card-section>
-            <q-btn color="black" :to="'/komentari/' + trenutniID" label="Dodaj komentar" />
+            <q-btn class="button"  :to="'/komentari/' + trenutniID" label="Dodaj komentar" />
             
         </q-card-section>
 
@@ -114,9 +114,14 @@
 
     <div class="q-pa-md row items-start q-gutter-xs">
       <p style="font-size: 25px; color: white">Komentari:</p>
+
     </div>
+    <div class="q-pa-md row items-start q-gutter-xs">
+    <p style="font-size: 20px; color: white">Ovdje možete pogledati komentare o atrakciji</p>
+    </div>
+    <!-- {{ comments }} -->
     <div class="q-pa-md row items-start q-gutter-md">
-      <q-card v-for="post in 6" :key="post" class="my-card" flat bordered>
+      <q-card v-for="item in comments" :key="item" class="my-card" flat bordered>
         <q-item>
           <q-item-section avatar>
             <q-avatar>
@@ -124,13 +129,13 @@
             </q-avatar>
           </q-item-section>
           <q-item-section>
-            <q-item-label>Kristian</q-item-label>
+            {{item.vk_id_korisnika}}
           </q-item-section>
         </q-item>
         <q-separator />
         <q-card-section horizontal>
           <q-card-section>
-            <text>Ovo je testni komentar.</text>
+            {{item.Komentar}}
           </q-card-section>
         </q-card-section>
       </q-card>
@@ -147,6 +152,7 @@ import { api } from 'boot/axios'
 import { useRoute, useRouter } from 'vue-router';
 
 const posts = ref([])
+const comments = ref([])
 const route = useRoute()
 const router = useRouter()
 
@@ -155,7 +161,9 @@ const getPosts = async () => {
   try {
     const response = await api.get(`/atrakcije/${trenutniID}`)
     posts.value = response.data
-
+    const komentari = await api.get(`/komentari/${trenutniID}`)
+    comments.value = komentari.data.data
+    console.log(komentari.data);
     console.log("ID je: ", trenutniID)
     console.log("Podatak iz baze po ID: ", posts.value)
 
@@ -260,4 +268,14 @@ onMounted(() => {
   max-width: 620px;
   word-wrap: break-word;
 }
+
+.button{
+  background-color: black;
+  color:white;
+}
+.button:hover{
+  background-color:white;
+  color:black;
+}
+
 </style>

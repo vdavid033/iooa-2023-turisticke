@@ -1,14 +1,11 @@
 <template>
-  <div style="background-color: #8CDEED;">
+  <div style="background-color: #229df9;">
 
   <h3>Unos komentara</h3>
   <h6>U polje ispod upišite svoj komentar o atrakciji</h6>
-  <q-form class="text">
-
-      <q-input filled v-model="komentar" label="Unesi svoj komentar.. " :dense="dense" />
-    </q-form>
-
-    
+  <div class="q-pa-md row items-start q-gutter-md">
+      <q-input class="textarea" outlined v-model="komentar" label="Unesi svoj komentar.. " :dense="dense" />
+  </div>
     <q-card-section>
             <q-btn label="Dodaj komentar" @click="dodajKomentar(komentar, trenutniID)" />
         </q-card-section>
@@ -54,16 +51,13 @@ const dodajKomentar = async (komentar, trenutniID) => {
 
 
 <style scoped>
-.text {
-  width: 98%;
-  height: 100px;
+.textarea {
+  width: 98%; 
+  height: 120px;
   margin-left: 5px;
   margin-bottom: 10px;
-  padding-top: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: rgb(228, 233, 234);
-  
+  padding-top: 25px;
+  background-color: rgb(155, 197, 194);
   
 }
 
