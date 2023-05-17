@@ -8,15 +8,14 @@ var cors = require('cors')
 var bodyParser = require('body-parser');
 //const conn=require('./connection')
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false })); 
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true})); 
+app.use(express.json());
 const dbConfig = require("./dbConfig");
 
 app.use(cors());
 //const cors = require('cors');
-app.use(cors({
-    origin: 'http://localhost:9000'
-}));
+app.use(cors({ origin: "*" }));
 
 
 
@@ -34,7 +33,7 @@ dbConn.connect();
 
 
 
-/*
+
 // Ovo riješava problem: 
 // Origin <origin> is not allowed by Access-Control-Allow-Origin
 // from origin 'http://localhost:4200' has been blocked by CORS policy
@@ -44,7 +43,6 @@ app.use(function (req, res, next) {
     next();
 });
 // kraj fix-a
-*/
 
 
 app.post('/unosAtrakcija', function (request, response) {
@@ -57,7 +55,29 @@ app.post('/unosAtrakcija', function (request, response) {
   return response.send({ error: false, data: results, message:'Atrakcija unesena.' });
   });
 });
+app.post("/api/unos-slike", function (req, res) {
+  const data = req.body;
+  const slika = data.slika;
 
+  connection.query(
+    "INSERT INTO predmet (slika) VALUES (?)",
+    [slika],
+    function (error, results, fields) {
+      if (error) {
+        console.error(error);
+        return res.status(500).send({
+          error: true,
+          message: "Dogodila se greška prilikom dodavanja teksta.",
+        });
+      }
+      return res.send({
+        error: false,
+        data: results,
+        message: "Slika je dodana.",
+      });
+    }
+  );
+});
 
 
 //uzimanje podataka o atrakcijama

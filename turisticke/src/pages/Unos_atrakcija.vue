@@ -16,14 +16,34 @@
       <q-input ref="adresaRef" v-model="inputAdresa" label="Adresa" placeholder="Adresa atrakcije">
       </q-input>
 
-      <q-input ref="slikaRef" v-model="inputSlika" label="Slika" placeholder="https://stranica/slika.jpg">
-      </q-input>
-
       <q-input ref="sirinaRef" v-model="inputSirina" label="Širina" placeholder="Grografska Širina atr">
       </q-input>
 
       <q-input ref="duzinaRef" v-model="inputDuzina" label="Dužina" placeholder="Geografska dužina atr">
       </q-input>
+
+      <div>
+      <input type="file" @change="onFileChange" />
+
+      <q-btn @click="convertImage">Spremi sliku</q-btn>
+      <q-separator></q-separator>
+      <div v-if="base64Image">
+        <img :src="base64Image" />
+        <q-separator></q-separator>
+
+        <div
+          class="q-pa-sm"
+          style="max-width: 700px; overflow-wrap: break-word"
+        ></div>
+      </div>
+    </div>
+  </div>
+        <div
+          class="q-pa-sm"
+          style="max-width: 700px; overflow-wrap: break-word"
+        ></div>
+      </div>
+    </div>
       <div class="row justify-center q-pa-md">
         <div class="row justify-center q-pa-md">
           <q-btn
@@ -34,9 +54,8 @@
         />
         </div>
       </div>
-    </div>
-  </div>
-</div>
+
+
 <q-dialog v-model="showDialog">
       <q-card>
         <q-card-section> Atrakcija je uspješno dodana! </q-card-section>
@@ -60,6 +79,7 @@
 <script>
 // eslint-disable-next-line no-unused-vars
 import { QDialog } from 'quasar'
+import imageCompression from "browser-image-compression";
 // eslint-disable-next-line no-unused-vars
 import { ref } from 'vue'
 import axios from 'axios' // Import axios
@@ -71,11 +91,66 @@ export default {
       inputDuzina: '',
       inputSirina: '',
       inputAdresa: '',
-      inputSlika: ''
+      inputSlika: null,
+
     }
   },
   methods: {
+    async onFileChange(e) {
+      this.file = e.target.files[0];
+      await this.convertImage();
+    },
+    async convertImage() {
+      if (!this.file && !this.imageUrl) {
+        return alert("Molimo odaberite sliku ili unesite URL slike.");
+      }
 
+      const options = {
+        maxSizeMB: 1, // Maximum file size in MB
+        maxWidthOrHeight: 1920, // Maximum width or height, whichever is smaller
+        useWebWorker: true,
+      };
+
+      try {
+        let compressedFile;
+
+        if (this.imageUrl) {
+          const response = await fetch(this.imageUrl);
+          const blob = await response.blob();
+          compressedFile = await imageCompression(blob, options);
+        } else {
+          compressedFile = await imageCompression(this.file, options);
+        }
+
+        const reader = new FileReader();
+        reader.readAsDataURL(compressedFile);
+        reader.onload = () => {
+          this.base64Image = reader.result;
+          this.base64Text = reader.result.replace(
+            /^data:image\/[a-z]+;base64,/,
+            ""
+          );
+          this.inputSlika = "data:image/jpg;base64," + this.base64Text;
+        };
+        reader.onerror = (error) => {
+          console.error(error);
+        };
+      } catch (error) {
+        console.error(error);
+        return alert("Došlo je do pogreške prilikom kompresije slike.");
+      }
+    },
+
+    closeAndReload() {
+      this.showDialog = false;
+      window.location.reload();
+    },
+
+    onFileSelected (event){
+      this.inputSlika = event.target.files[0] },
+      onUpload () {
+        axios.post
+      },
     resetForm () {
       this.inputNaziv = ''
       this.inputOpis = ''
@@ -90,12 +165,6 @@ export default {
       this.$refs.sirinaRef.resetValidation()
       this.$refs.adresaRef.resetValidation()
     },
-
-    closeAndReload () {
-      this.showDialog = false
-      window.location.reload()
-    },
-
     async submitForm () {
       const sampleData = {
         naziv: this.inputNaziv,
@@ -117,10 +186,11 @@ export default {
         console.error(error)
       }
     }
-  }
+  },
 }
 
 </script>
+
 <style>
   .bg-image {
     background-image: url(https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.williamhortonphotography.com%2Fwp-content%2Fuploads%2F2017%2F09%2FCroatia-Krk-2015-10.jpg&f=1&nofb=1&ipt=374c233d6e256918b9237640e1c0d6b6d0d4a377be4c7dfc38405cba259d2566&ipo=images) ;
