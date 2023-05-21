@@ -41,7 +41,7 @@ const routes = [
     path: "/komentari",
     component: () => import("layouts/BlankLayout.vue"),
     children: [
-      {name: "komentari", path: "", component: () => import("src/pages/komentariPage.vue") },
+      {name: "komentari", path: ":id", component: () => import("src/pages/komentariPage.vue") },
     ],
   },
 

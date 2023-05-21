@@ -1,52 +1,64 @@
 <template>
-  <div style="background-color: #8CDEED;">
+  <div style="background-color: #229df9;">
 
   <h3>Unos komentara</h3>
   <h6>U polje ispod upišite svoj komentar o atrakciji</h6>
-  <q-form @submit.prevent="addComment">
-      <textarea v-model="newComment" placeholder="Unesite svoj komentar"></textarea>
-      
-    </q-form>
-
-    <q-card-section>  
-      <q-btn type="submit">DODAJ KOMENTAR</q-btn>
-    </q-card-section>
+  <div class="q-pa-md row items-start q-gutter-md">
+      <q-input class="textarea" outlined v-model="komentar" label="Unesi svoj komentar.. " :dense="dense" />
+  </div>
+    <q-card-section>
+            <q-btn label="Dodaj komentar" @click="dodajKomentar(komentar, trenutniID)" />
+        </q-card-section>
 
 
   <q-card-section>
       <q-btn color="#4CAF50" @click="$router.push('/')" label="Natrag na početnu" />
     </q-card-section>
-    
+
 
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      newComment: ''
+<script setup>
+import { ref, onMounted } from "vue"
+import { api } from 'boot/axios'
+
+import { useRoute, useRouter } from 'vue-router';
+
+const posts = ref([])
+const route = useRoute()
+const router = useRouter()
+const trenutniID = route.params.id
+
+
+//Dodavanje komentara za atrakciju
+
+const dodajKomentar = async (komentar, trenutniID) => {
+    try {
+        console.log('Komentar: ', komentar)
+        console.log("ID: ", trenutniID)
+
+        const response = await api.post(`http://localhost:4200/dodajKomentar/${trenutniID}`, {
+            Komentar: komentar
+        });
+        console.log(response.data);
     }
-  },
-  methods: {
-    addComment() {
-      // Ovdje dodajte kod za spremanje komentara u bazu podataka
-      this.newComment = '' // Resetiranje teksta u tekstnom okviru
+    catch (error) {
+        console.log(error);
     }
-  }
 }
 </script>
 
 
-
 <style scoped>
-textarea {
-  width: 100%;
-  height: 100px;
+.textarea {
+  width: 98%;
+  height: 120px;
+  margin-left: 5px;
   margin-bottom: 10px;
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  padding-top: 25px;
+  background-color: rgb(155, 197, 194);
+
 }
 
 button {
@@ -56,10 +68,10 @@ button {
   border-radius: 5px;
   padding: 10px 20px;
   cursor: pointer;
-  
+
 }
 
 button:hover {
-  background-color: #3e8e41;
+  background-color: #ff9900;
 }
 </style>

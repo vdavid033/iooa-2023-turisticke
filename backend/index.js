@@ -91,17 +91,45 @@ app.get('/atrakcije', (req,res)=>{
     });
 });
 
-// uzimanje podataka o komentarima
+/// uzimanje podataka o komentarima
 app.get("/komentari", function (request, response) {
-    dbConn.query("SELECT * FROM Komentari", function (error, results, fields) {
-        if (error) throw error;
-        return response.send({
-            error: false,
-            data: results,
-            message: "lista komentara.",
-        });
+  dbConn.query("SELECT * FROM Komentari", function (error, results, fields) {
+      if (error) throw error;
+      return response.send({
+          error: false,
+          data: results,
+          message: "lista komentara.",
+      });
+  });
+});
+
+
+app.get('/komentari/:id', function (request, response) {
+let id_atrakcije = request.params.id;
+dbConn.query("SELECT * FROM Komentari WHERE VK_ID_atrakcije=?", id_atrakcije, function (error, results, fields) {
+    if (error) throw error;
+    return response.send({
+        error: false,
+        data: results,
+        message: "lista komentara.",
     });
 });
+});
+
+// Dodavanje komentara za atrakciju po ID-u
+
+app.post('/dodajKomentar/:id', (req, res) => {
+const data = [req.body.Komentar, req.params.id]
+dbConn.query("INSERT INTO Komentari( Komentar, VK_ID_atrakcije) VALUES (?,?)", data,(err,result)=>{
+  if(err){
+    res.send('Error')
+  }else{
+    res.send(result)
+  }
+})
+});
+
+
 
 //uzimanje podataka o korisnicima
 app.get("/korisnici", function (request, response) {
@@ -298,7 +326,31 @@ app.delete('/obrisi_atrakcije/:id', function (request, response){
       return response.send({ error: false, data: results, message: 'ocjena atrakcija je obrisana ' });
     });
   });
+//brisanje komentara
 
+app.delete('/obrisi_komentar/:id', function (request, response){
+
+    
+  let id_komentara = request.params.id;
+
+  console.log(`Received request to delete komentar with id: ${id_komentara}`); // Log the received id
+
+  if (!id_komentara) {
+    return response.status(400).send({ error: true, message: 'nedostaje id komentara' });
+  }
+
+ const deleteQuery = "DELETE  FROM Komentari WHERE ID_komentara = ?";
+  dbConn.query(deleteQuery, [id_komentara], function (error, results) {
+    if (error) {
+      console.log(`Error when executing the delete query: ${error}`); // Log any error from the query
+      throw error;
+    }
+
+    console.log('Deletion result: ${JSON.stringify(results)}'); // Log the result of the deletion
+
+    return response.send({ error: false, data: results, message: 'komentar je obrisan obrisi komentar.' });
+  });
+});
 
   app.put('/atrakcije/azuriraj/:id', (req, res) => {
     console.log(req.body)
