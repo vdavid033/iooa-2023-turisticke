@@ -93,7 +93,7 @@ const goToAtrakcijeDetalji = (id) => {
 
 <style>
 .bg-blue {
-  background-color: #1e90ff;
+  background-color: #21c9fc;
   color: white;
 }
 
