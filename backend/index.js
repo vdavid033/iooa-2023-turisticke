@@ -178,6 +178,18 @@ app.delete('/obrisi_atrakcije/:id', function (request, response){
     });
   });
 
+ // Dodavanje ocjene za atrakciju
+ 
+ app.put('/dodajOcjenu/:id', (req, res) => {
+  const data = [req.body.prosjecna_ocjena, req.params.id]
+  dbConn.query("UPDATE atrakcije SET prosjecna_ocjena = ? WHERE id_atrakcije = ?", data,(err,result)=>{
+    if(err){
+      res.send('Error')
+    }else{
+      res.send(result)
+    }
+  })
+});
 
 
 
@@ -207,6 +219,34 @@ app.delete('/obrisi_atrakcije/:id', function (request, response){
     });
   });
 
+
+
+
+
+  app.delete('/obrisi_ocjenu_atrakcije/:id', function (request, response){
+
+    
+    let id_atrakcije = request.params.id;
+  
+    console.log(`Received request to delete atrakcija with id: ${id_atrakcije}`); // Log the received id
+  
+    if (!id_atrakcije) {
+      return response.status(400).send({ error: true, message: 'nedostaje id atrakcije' });
+    }
+  
+   const deleteQuery = "UPDATE atrakcije SET prosjecna_ocjena = NULL WHERE id_atrakcije = ?";
+     //const deleteQuery = "DELETE  FROM atrakcije WHERE id_atrakcije = '${id}'";
+    dbConn.query(deleteQuery, [id_atrakcije], function (error, results) {
+      if (error) {
+        console.log(`Error when executing the delete query: ${error}`); // Log any error from the query
+        throw error;
+      }
+  
+      console.log('Deletion result: ${JSON.stringify(results)}'); // Log the result of the deletion
+  
+      return response.send({ error: false, data: results, message: 'ocjena atrakcija je obrisana ' });
+    });
+  });
 /*
   app.put('/dodaj_sliku_atrakcije/:id', function (request, response){
 
@@ -260,6 +300,17 @@ app.delete('/obrisi_atrakcije/:id', function (request, response){
   });
 
 
+  app.put('/atrakcije/azuriraj/:id', (req, res) => {
+    console.log(req.body)
+    const data = [req.body.naziv, req.body.opis, req.body.slika, req.body.prosjecna_ocjena, req.body.geografska_sirina, req.body.geografska_duzina, req.body.adresa, req.params.id]
+    dbConn.query("UPDATE atrakcije SET naziv = ?, opis = ?,  slika = ?,  prosjecna_ocjena = ?,  geografska_sirina = ?,  geografska_duzina = ?,  adresa = ? WHERE id_atrakcije = ?", data,(err,result)=>{
+      if(err){
+        res.send('Error' + err)
+      }else{
+        res.send(result)
+      }
+    })
+  });
 
 //port na kojem je app
 app.listen(4200, function () {

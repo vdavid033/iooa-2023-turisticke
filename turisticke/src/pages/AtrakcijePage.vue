@@ -38,18 +38,60 @@
         <p style="font-size: 20px;">Adresa:</p>
         <h7>{{ post.adresa }}</h7>
         <q-separator color="white" />
-        <p style="font-size: 20px;">Ocjena:</p>
-        <q-rating v-model=post.prosjecna_ocjena :max="5" :readonly="true" size="32px" />
-        <q-btn round color="black" icon="delete" style="right: -12px"
-        @click="deleteOcjena(post.id_atrakcije)"/>
-        <q-separator color="white" />
-        <p style="font-size: 20px;">Geografska dužina:</p>
-        <p style="font-size: 15px;">{{ post.geografska_sirina }}</p>
-        <q-separator color="white" />
-        <p style="font-size: 20px;">Geografska širina:</p>
-        <p style="font-size: 15px;">{{ post.geografska_duzina }}</p>
-    </div>
-  </div>
+          <p style="font-size: 20px;">Ocjena:</p>
+          <q-rating @click="dodajOcjenu(post.id_atrakcije, post.prosjecna_ocjena)" v-model=post.prosjecna_ocjena :max="5"
+            :readonly="true" size="32px" />
+
+            <q-btn round color="black" icon="delete" style="right: -12px" @click="deleteOcjena(post.id_atrakcije)" />
+
+
+          <div class="q-pa-md">
+            <q-btn-dropdown color="primary" label="Promijeni ocjenu">
+              <q-list>
+                <q-item clickable v-close-popup @click="dodajOcjenu(1, post.id_atrakcije)">
+                  <q-item-section>
+                    <q-item-label>1</q-item-label>
+                  </q-item-section>
+                </q-item>
+
+                <q-item clickable v-close-popup @click="dodajOcjenu(2, post.id_atrakcije)">
+                  <q-item-section>
+                    <q-item-label>2</q-item-label>
+                  </q-item-section>
+                </q-item>
+
+                <q-item clickable v-close-popup @click="dodajOcjenu(3, post.id_atrakcije)">
+                  <q-item-section>
+                    <q-item-label>3</q-item-label>
+                  </q-item-section>
+                </q-item>
+
+                <q-item clickable v-close-popup @click="dodajOcjenu(4, post.id_atrakcije)">
+                  <q-item-section>
+                    <q-item-label>4</q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item clickable v-close-popup @click="dodajOcjenu(5, post.id_atrakcije)">
+                  <q-item-section>
+                    <q-item-label>5</q-item-label>
+                  </q-item-section>
+                </q-item>
+
+              </q-list>
+            </q-btn-dropdown>
+
+          </div>
+          <q-separator color="white" />
+
+<div class="" style="max-width: 400px"></div>
+
+<p style="font-size: 20px;">Geografska dužina:</p>
+<p style="font-size: 15px;">{{ post.geografska_sirina }}</p>
+<q-separator color="white" />
+<p style="font-size: 20px;">Geografska širina:</p>
+<p style="font-size: 15px;">{{ post.geografska_duzina }}</p>
+</div>
+</div>
 </div>
 
 
@@ -114,7 +156,23 @@ const getPosts = async () => {
     console.log(error)
   }
 }
+const dodajOcjenu = async (ocjena, id) => {
+  try {
+    console.log('Kliknuli ste na: ', ocjena, " ocjenu")
+    console.log("ID: ", id)
 
+    const response = await api.put(`http://localhost:4200/dodajOcjenu/${id}`, {
+      prosjecna_ocjena: ocjena
+    });
+    console.log(response.data);
+
+
+  }
+  catch (error) {
+    console.log(error);
+  }
+  getPosts();
+}
 
 const obrisi_sliku = async (id) => {
 try {
@@ -129,14 +187,14 @@ try {
 }
 
 const deleteOcjena = async (id) => {
-try {
-  //const response = await api.delete('atrakcije/${id}');
-  const response = await api.delete(`http://localhost:4200/obrisi_ocjenu_atrakcije/${id}`);
-  console.log(response.data);
-  // Perform any additional actions after successful deletion
-} catch (error) {
-  console.log(error);
-}
+  try {
+    //const response = await api.delete('atrakcije/${id}');
+    const response = await api.delete(`http://localhost:4200/obrisi_ocjenu_atrakcije/${id}`);
+    console.log(response.data);
+    // Perform any additional actions after successful deletion
+  } catch (error) {
+    console.log(error);
+  }
   getPosts();
 }
 
@@ -144,6 +202,8 @@ try {
 onMounted(() => {
   getPosts()
 })
+
+
 
 
 </script>

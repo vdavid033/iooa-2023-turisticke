@@ -134,7 +134,7 @@ export default {
         };
         reader.onerror = (error) => {
           console.error(error);
-        };
+        };b
       } catch (error) {
         console.error(error);
         return alert("Došlo je do pogreške prilikom kompresije slike.");
