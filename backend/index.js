@@ -281,10 +281,44 @@ app.delete('/obrisi_komentar/:id', function (request, response){
 
 
 
+//azuriranje atrakcije
+
+app.put('/atrakcije/azuriraj/:id', (req, res) => {
+  console.log(req.body)
+  const data = [req.body.naziv, req.body.opis, req.body.slika, req.body.prosjecna_ocjena, req.body.geografska_sirina, req.body.geografska_duzina, req.body.adresa, req.params.id]
+  dbConn.query("UPDATE atrakcije SET naziv = ?, opis = ?,  slika = ?,  prosjecna_ocjena = ?,  geografska_sirina = ?,  geografska_duzina = ?,  adresa = ? WHERE id_atrakcije = ?", data,(err,result)=>{
+    if(err){
+      res.send('Error' + err)
+    }else{
+      res.send(result)
+    }
+  })
+});
 
 
 
 
+
+//Dohvacanje komentara za specificnu atrakciju
+
+app.get('/atrakcije/:id/komentari/', function (request, response) {
+  let id_atrakcije = request.params.id;
+  if (!id_atrakcije) {
+      return response.status(400).send({
+          error: true, 
+          
+          message: 'Unesite id_atrakcije'
+      });
+  }
+  dbConn.query('SELECT * FROM Komentari where VK_ID_atrakcije=?', id_atrakcije, function
+      (error, results, fields) {
+      if (error) throw error;
+      return response.send({
+         data: results
+              
+      });
+  });
+});
 
 
 
