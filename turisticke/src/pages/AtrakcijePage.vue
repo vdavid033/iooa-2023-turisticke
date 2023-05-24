@@ -135,7 +135,8 @@
         <q-separator />
         <q-card-section horizontal>
           <q-card-section>
-            {{item.Komentar}}
+             {{item.Komentar}}
+             <q-btn round color="black" icon="delete" style="right: -12px" @click="deleteKomentar(item.ID_komentara)" />
           </q-card-section>
         </q-card-section>
       </q-card>
@@ -241,6 +242,19 @@ const deleteOcjena = async (id) => {
   }
   getPosts();
 }
+
+// Ispravljeno ime argumenta funkcije (id -> item.ID_komentara)
+const deleteKomentar = async (id) => {
+  try {
+    const response = await api.delete(`http://localhost:4200/obrisi_komentar/${id}`);
+    console.log(response.data);
+ 
+  } catch (error) {
+    console.log(error);
+  }
+  getPosts();
+}
+
 
 
 onMounted(() => {

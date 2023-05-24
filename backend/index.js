@@ -220,7 +220,7 @@ app.delete('/obrisi_atrakcije/:id', function (request, response){
   
 
 
-
+//brisanje ocjene atrakcije
 
 
   app.delete('/obrisi_ocjenu_atrakcije/:id', function (request, response){
@@ -252,29 +252,27 @@ app.delete('/obrisi_atrakcije/:id', function (request, response){
 
 //brisanje komentara
 
-app.delete('/obrisi_komentar/:id', function (request, response){
+app.delete('/obrisi_komentar/:id', function (request, response) {
+  let ID_komentara = request.params.id;
 
-    
-    let id_komentara = request.params.id;
-  
-    console.log(`Received request to delete komentar with id: ${id_komentara}`); // Log the received id
-  
-    if (!id_komentara) {
-      return response.status(400).send({ error: true, message: 'nedostaje id komentara' });
+  console.log(`Primljen zahtjev za brisanje komentara s ID-om: ${ID_komentara}`); // Dodan ispravan ID u ispisu
+
+  if (!ID_komentara) {
+    return response.status(400).send({ error: true, message: 'Nedostaje ID komentara' });
+  }
+
+  const deleteQuery = "DELETE FROM Komentari WHERE ID_komentara = ?";
+  dbConn.query(deleteQuery, [ID_komentara], function (error, results) {
+    if (error) {
+      console.log(`Greška prilikom izvršavanja upita za brisanje: ${error}`);
+      throw error;
     }
-  
-   const deleteQuery = "DELETE  FROM Komentari WHERE ID_komentara = ?";
-    dbConn.query(deleteQuery, [id_komentara], function (error, results) {
-      if (error) {
-        console.log(`Error when executing the delete query: ${error}`); // Log any error from the query
-        throw error;
-      }
-  
-      console.log('Deletion result: ${JSON.stringify(results)}'); // Log the result of the deletion
-  
-      return response.send({ error: false, data: results, message: 'komentar je obrisan obrisi komentar.' });
-    });
+
+    console.log(`Rezultat brisanja: ${JSON.stringify(results)}`);
+
+    return response.send({ error: false, data: results, message: 'Komentar je obrisan.' });
   });
+});
 
 
 
