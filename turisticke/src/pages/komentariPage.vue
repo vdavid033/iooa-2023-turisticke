@@ -15,24 +15,25 @@
       <q-btn color="#4CAF50" @click="$router.push('/')" label="Natrag na početnu" />
     </q-card-section>
     
-
+<!-- Poruka nakon klika na dodaj komentar -->
+     <p style="font-size: 16px; color:black;">{{ message }}</p> 
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue"
 import { api } from 'boot/axios'
-
 import { useRoute, useRouter } from 'vue-router';
+
 
 const posts = ref([])
 const route = useRoute()
 const router = useRouter()
 const trenutniID = route.params.id
+const message = ref(''); 
 
 
 //Dodavanje komentara za atrakciju
-
 const dodajKomentar = async (komentar, trenutniID) => {
     try {
         console.log('Komentar: ', komentar)
@@ -42,6 +43,8 @@ const dodajKomentar = async (komentar, trenutniID) => {
             Komentar: komentar
         });
         console.log(response.data);
+
+        message.value = 'Uspješno ste dodali komentar!';
     }
     catch (error) {
         console.log(error);
