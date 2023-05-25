@@ -44,39 +44,39 @@
           <h7>{{ post.adresa }}</h7>
           <q-separator color="white" />
           <p style="font-size: 20px;">Ocjena:</p>
-          <q-rating @click="dodajOcjenu(post.id_atrakcije, post.prosjecna_ocjena)" v-model=post.prosjecna_ocjena :max="5"
+          <q-rating @click="dodajOcjenuOcjene(post.id_atrakcije, post.prosjecna_ocjena)" v-model=praviProsjek :max="5"
             :readonly="true" size="32px" />
 
             <q-btn round color="black" icon="delete" style="right: -12px" @click="deleteOcjena(post.id_atrakcije)" />
-
+          
 
           <div class="q-pa-md">
             <q-btn-dropdown color="primary" label="Promijeni ocjenu">
               <q-list>
-                <q-item clickable v-close-popup @click="dodajOcjenu(1, post.id_atrakcije)">
+                <q-item clickable v-close-popup @click="dodajOcjenuOcjene(1, post.id_atrakcije)">
                   <q-item-section>
                     <q-item-label>1</q-item-label>
                   </q-item-section>
                 </q-item>
 
-                <q-item clickable v-close-popup @click="dodajOcjenu(2, post.id_atrakcije)">
+                <q-item clickable v-close-popup @click="dodajOcjenuOcjene(2, post.id_atrakcije)">
                   <q-item-section>
                     <q-item-label>2</q-item-label>
                   </q-item-section>
                 </q-item>
 
-                <q-item clickable v-close-popup @click="dodajOcjenu(3, post.id_atrakcije)">
+                <q-item clickable v-close-popup @click="dodajOcjenuOcjene(3, post.id_atrakcije)">
                   <q-item-section>
                     <q-item-label>3</q-item-label>
                   </q-item-section>
                 </q-item>
 
-                <q-item clickable v-close-popup @click="dodajOcjenu(4, post.id_atrakcije)">
+                <q-item clickable v-close-popup @click="dodajOcjenuOcjene(4, post.id_atrakcije)">
                   <q-item-section>
                     <q-item-label>4</q-item-label>
                   </q-item-section>
                 </q-item>
-                <q-item clickable v-close-popup @click="dodajOcjenu(5, post.id_atrakcije)">
+                <q-item clickable v-close-popup @click="dodajOcjenuOcjene(5, post.id_atrakcije)">
                   <q-item-section>
                     <q-item-label>5</q-item-label>
                   </q-item-section>
@@ -107,7 +107,7 @@
     </q-card-section>
     <q-card-section>
             <q-btn class="button"  :to="'/komentari/' + trenutniID" label="Dodaj komentar" />
-
+            
         </q-card-section>
 
     <q-separator />
@@ -135,7 +135,8 @@
         <q-separator />
         <q-card-section horizontal>
           <q-card-section>
-            {{item.Komentar}}
+             {{item.Komentar}}
+             <q-btn round color="black" icon="delete" style="right: -12px" @click="deleteKomentar(item.ID_komentara)" />
           </q-card-section>
         </q-card-section>
       </q-card>
@@ -153,6 +154,7 @@ import { useRoute, useRouter } from 'vue-router';
 
 const posts = ref([])
 const comments = ref([])
+const praviProsjek = ref(0)
 const route = useRoute()
 const router = useRouter()
 
@@ -217,6 +219,33 @@ const dodajOcjenu = async (ocjena, id) => {
 }
 
 
+//Dodavanje ocjene za atrakciju u tablicu OCJENE
+
+const dodajOcjenuOcjene = async (ocjena, id) => {
+  try {
+    console.log('Kliknuli ste na: ', ocjena, " ocjenu")
+    console.log("ID: ", id)
+
+    const response = await api.post(`http://localhost:4200/dodajOcjenuOcjene/${id}`, {
+      prosjecna_ocjena: ocjena
+    });
+
+    dohvatProsjecneOcjene(trenutniID)
+    console.log("OCJENA SE PROMJENILA I SAD JE: ", praviProsjek.value, " i ID je: ", trenutniID)
+    dodajOcjenu(praviProsjek.value, trenutniID)
+
+  }
+  catch (error) {
+    console.log(error);
+  }
+  getPosts();
+}
+
+
+
+
+
+
 
 const obrisi_sliku = async (id) => {
   try {
@@ -243,7 +272,41 @@ const deleteOcjena = async (id) => {
 }
 
 
+const dohvatProsjecneOcjene = async (id) => {
+  try {
+    console.log("ID JE: ", id)
+
+    const response = await api.get(`http://localhost:4200/atrakcijeProsjecneOcjene/${id}`);
+    praviProsjek.value =  response.data[0].prosjek
+    console.log("PRAVI prosjek za ", id, " = ", praviProsjek.value)
+    return praviProsjek.value
+
+
+  }
+  catch (error) {
+    console.log(error);
+  }
+}
+
+
+
+
+// Ispravljeno ime argumenta funkcije (id -> item.ID_komentara)
+const deleteKomentar = async (id) => {
+  try {
+    const response = await api.delete(`http://localhost:4200/obrisi_komentar/${id}`);
+    console.log(response.data);
+ 
+  } catch (error) {
+    console.log(error);
+  }
+  getPosts();
+}
+
+
+
 onMounted(() => {
+  dohvatProsjecneOcjene(trenutniID)
   getPosts()
 })
 
