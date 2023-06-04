@@ -15,7 +15,7 @@
       <q-btn color="#4CAF50" @click="$router.push('/')" label="Natrag na početnu" />
     </q-card-section>
 
-
+    <p>{{ message }}</p>
   </div>
 </template>
 
@@ -29,24 +29,26 @@ const posts = ref([])
 const route = useRoute()
 const router = useRouter()
 const trenutniID = route.params.id
-
+const message = ref('');
 
 //Dodavanje komentara za atrakciju
 
 const dodajKomentar = async (komentar, trenutniID) => {
-    try {
-        console.log('Komentar: ', komentar)
-        console.log("ID: ", trenutniID)
+  try {
+    console.log('Komentar: ', komentar);
+    console.log("ID: ", trenutniID);
 
-        const response = await api.post(`http://localhost:4200/dodajKomentar/${trenutniID}`, {
-            Komentar: komentar
-        });
-        console.log(response.data);
-    }
-    catch (error) {
-        console.log(error);
-    }
-}
+    const response = await api.post(`http://localhost:4200/dodajKomentar/${trenutniID}`, {
+      Komentar: komentar
+    });
+    console.log(response.data);
+
+    message.value = 'Uspješno ste dodali komentar!'; 
+  } catch (error) {
+    console.log(error);
+    
+  }
+};
 </script>
 
 

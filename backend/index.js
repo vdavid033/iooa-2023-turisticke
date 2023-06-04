@@ -220,6 +220,36 @@ app.delete('/obrisi_atrakcije/:id', function (request, response){
 });
 
 
+//DOHVAT PROSJEČNE OCJENE ZA ATRAKCIJU
+app.get('/atrakcijeProsjecneOcjene/:id', (req, res) => {
+  const data = [req.params.id]
+  //SELECT AVG(ocjena) FROM `Ocjena` WHERE VK_ID_Atrakcije = 141
+  dbConn.query("SELECT AVG(ocjena) as prosjek FROM Ocjena WHERE VK_ID_Atrakcije = ?", data,(err,result)=>{
+    if(err){
+      res.send('Error')
+    }else{
+      res.send(result)
+    }
+  })
+});
+
+
+   // Dodavanje ocjene za atrakciju u tablicu OCJENE
+ 
+   app.post('/dodajOcjenuOcjene/:id', (req, res) => {
+    const data = [req.body.prosjecna_ocjena, req.params.id]
+    //INSERT INTO `Ocjena`( `ocjena`, `VK_ID_Atrakcije`) VALUES (2,141)
+    dbConn.query("INSERT INTO Ocjena (ocjena, VK_ID_Atrakcije) VALUES ( ? , ?)", data,(err,result)=>{
+      if(err){
+        res.send('Error')
+      }else{
+        res.send(result)
+      }
+    })
+  });
+
+
+
 
 
   app.delete('/obrisi_sliku_atrakcije/:id', function (request, response){
