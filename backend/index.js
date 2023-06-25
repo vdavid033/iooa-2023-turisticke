@@ -55,6 +55,16 @@ app.post('/unosAtrakcija', function (request, response) {
   return response.send({ error: false, data: results, message:'Atrakcija unesena.' });
   });
 });
+app.post('/dodavanje_slike', function (request, response) {
+  const data = request.body;
+  slika = [[data.id_atrakcije_s, data.slika_s]]
+  
+  dbConn.query('INSERT INTO slike (id_atrakcije_s, slika_s ) VALUES ? ',
+  [slika], function (error, results, fields) {
+  if (error) throw error;
+  return response.send({ error: false, data: results, message:'Slika dodana.' });
+  });
+});
 app.post("/api/unos-slike", function (req, res) {
   const data = req.body;
   const slika = data.slika;
@@ -90,7 +100,15 @@ app.get('/atrakcije', (req,res)=>{
         }
     });
 });
-
+app.get('/slike', (req,res)=>{
+  dbConn.query("select * from slike", (err,result)=>{
+      if(err){
+          res.send('error');
+      }else{
+          res.send(result);
+      }
+  });
+});
 /// uzimanje podataka o komentarima
 app.get("/komentari", function (request, response) {
   dbConn.query("SELECT * FROM Komentari", function (error, results, fields) {
@@ -115,7 +133,6 @@ dbConn.query("SELECT * FROM Komentari WHERE VK_ID_atrakcije=?", id_atrakcije, fu
     });
 });
 });
-
 // Dodavanje komentara za atrakciju po ID-u
 
 app.post('/dodajKomentar/:id', (req, res) => {
@@ -393,13 +410,10 @@ app.delete('/obrisi_komentar/:id', function (request, response){
       }
     })
   });
-
 //port na kojem je app
 app.listen(4200, function () {
 console.log('Node app is running on port 4200');
 });
 //module.exports = app;
-
-
 
 
